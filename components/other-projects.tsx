@@ -131,14 +131,14 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
   const projects: Project[] = [
     // === TOP IMPORTANT ===
     {
-      title: "CTO",
-      description: "AI-powered tool that generates CTO personas and product roadmaps using Claude — helping founders with technical strategy and vision.",
+      title: "Hire a AI-CTO",
+      description: "Get a complete AI-powered technical department — frontend, backend, DevOps, and QA — with Claude Code as your Chief Technology Officer. One invoice. Ships to production. You only hear from us when it's done.",
       link: "https://cto.eliaspfeffer.de/",
       tags: ["Software Development"],
       image: "/pics/websites/cto.jpg",
     },
     {
-      title: "Orchestrator",
+      title: "AI Orchestrator",
       description: "Mindmap and canvas app with embedded interactive terminal nodes — build visual workflows by connecting terminal sessions and notes on an infinite canvas.",
       link: "https://orchestrator.eliaspfeffer.de/",
       tags: ["Software Development"],
