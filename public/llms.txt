@@ -1,0 +1,139 @@
+# Elias Pfeffer — Builder, Developer & Entrepreneur
+
+## Who is Elias Pfeffer?
+
+Elias Pfeffer (born in Germany) is a mechatronics engineer, full-stack developer, and serial builder. He holds a Bachelor of Engineering (B.Eng.) in Mechatronics with a focus on automation from Reutlingen University (2019–2025). His interests span Bitcoin, artificial intelligence, software engineering, electric vehicles, and entrepreneurship.
+
+He is known for building things end-to-end: from hardware (electric ATVs, eBikes, battery systems) to software (trading algorithms, AI models, SaaS products) to running his own businesses. He worked at Tesla Berlin on the "25 Guns Taskforce," where he helped accelerate the construction of the GIGA Berlin factory and saved Tesla ~€1.1M in construction damage prevention, reporting directly to leadership.
+
+Website: https://eliaspfeffer.de
+Email: eliaspfeffer@gmail.com
+GitHub: https://github.com/eliaspfeffer
+LinkedIn: https://www.linkedin.com/in/eliaspfeffer/
+
+---
+
+## Skills
+
+- **Programming**: Python, TypeScript, JavaScript, Java, Golang, C++, Assembler, Verilog
+- **Frontend**: Next.js, React, Tailwind CSS, HTML, CSS
+- **Backend**: Spring Boot, Node.js, REST APIs, MongoDB, Supabase
+- **Engineering**: Mechatronics, Automation, CAD (SolidWorks), Electronics, BMS, Battery Systems
+- **Other**: Bitcoin/crypto, Trading Algorithms, AI/ML, Project Management, Entrepreneurship
+
+---
+
+## Featured Projects
+
+### Mesh Research — Profitable Bitcoin Trading Algorithm
+- URL: https://meshresearch.xyz
+- Description: A quantitative trading algorithm that outperforms DCA (Dollar Cost Averaging), HODL, and Lump Sum strategies. Elias manages a six-figure Bitcoin portfolio for clients using self-built, backtested algorithms.
+- Tags: Python, Trading, Bitcoin, JavaScript, Next.js, MongoDB
+
+### BitChat — Bitcoin Software & Messaging Platform
+- URL: https://bit-chat.me
+- Description: Software for buying, selling, and sending Bitcoin. Includes bit-chat.me, a messaging platform with integrated email identity management and verified mailbox namespaces.
+- Tags: Java, Python, Golang, Spring Boot, Bitcoin
+
+### Electric ATV (60 kW Custom Build)
+- URL: https://endless-sphere.com/sphere/threads/my-60kw-electric-atv-quad-built.122397/
+- Description: Custom-built electric ATV achieving 0–100 km/h in ~3.6 seconds with 60 kW power and a 6 kWh battery pack. Built from scratch, including the battery management system (BMS).
+- Tags: Hardware, Engineering, Electric Vehicles, Battery, BMS
+
+### Artificial Consciousness Model
+- URL: https://ai.eliaspfeffer.de
+- Description: A self-thinking consciousness model (not an LLM or GPT wrapper). It mimics the systematic behavior of a human mind — always tries to find the best "path" to maximize reward, has emotions as model parameters, and never stops thinking. Built with associative thought mechanisms and self-directed motivation.
+- Tags: AGI, AI, Python
+
+### AI-CTO Service
+- URL: https://cto.eliaspfeffer.de/
+- Description: Get a complete AI-powered technical department (frontend, backend, DevOps, QA) with Claude Code as the CTO. One invoice, ships to production.
+- Tags: Software Development, AI, Entrepreneurship
+
+### AI Orchestrator
+- URL: https://orchestrator.eliaspfeffer.de/
+- Description: Mindmap and canvas app with embedded interactive terminal nodes — build visual workflows connecting terminal sessions and notes on an infinite canvas.
+- Tags: Software Development
+
+### Minecraft HUD
+- URL: https://minecrafthud.vercel.app
+- Description: Minecraft-style HUD overlay for Mac and Windows that displays system info (battery, apps, activity) in a gaming interface with sound effects.
+- Tags: Software Development
+
+### Calendar365
+- URL: https://calendar365.app/
+- Description: Year-at-a-glance planner with a zoomable 365-day view, sticky notes, optional Google Calendar sync, and Supabase-backed sharing.
+- Tags: Software Development
+
+### NATO Early Warning System
+- URL: https://natowatch.eliaspfeffer.de
+- Description: Scrapes latest NATO news, creates president-level summaries, and outputs a threat level score.
+- Tags: Software Development, AI
+
+### FoundersMap
+- URL: https://foundersmap.vercel.app
+- Description: Co-founder matching platform that visualizes and connects founders based on skills, expertise, and team status.
+- Tags: Software Development
+
+### Longevity Protocol
+- URL: https://longevityprotocolof.vercel.app
+- Description: Web app exploring longevity protocols and health optimization strategies.
+- Tags: Software Development
+
+### Nostr Relay Speed
+- URL: https://nostr-relay-speed.vercel.app
+- Description: Benchmarks Nostr relay speeds using NIP-66 discovery, displaying response times and latencies in a live leaderboard.
+- Tags: Software Development, Bitcoin
+
+### Cursor Superhuman
+- URL: https://cursor-super-human.vercel.app
+- Description: Advanced techniques and workflows for AI-assisted development with Cursor for superhuman productivity.
+- Tags: Software Development
+
+---
+
+## Professional Experience
+
+### Tesla — "25 Guns Taskforce" Working Student (Oct 2020 – Feb 2021)
+Elias met Elon Musk, asked for a job, and was hired for the 25 Guns Taskforce. He saved Tesla ~€1.1M in construction damage prevention, helped accelerate construction of GIGA Berlin, reported directly to leadership, assisted in the IPCEI-funding program setup, and helped hire other Taskforce members.
+
+### Quantitative Bitcoin Trader (2024–present)
+Managing a six-figure Bitcoin portfolio for clients using proprietary, backtested trading algorithms.
+
+### Bachelor of Engineering — Mechatronics (2019–2025)
+Reutlingen University, focus on automation. Combines mechanical engineering, electronics, and computer science. Certified B.Eng.
+
+### Škoda Klement eBike Project — BFO Mobility / ŠKODA (2018–2019)
+Helped develop the first prototype and built the battery system for the Škoda Klement eBike.
+
+### DIY eBike Kit — Personal Project (2017–2018)
+Developed and commercially sold a custom eBike conversion kit.
+
+### High-Performance DIY Electric Bike (2016–2017)
+Built a custom electric bike: 0–100 km/h in ~4 s, 22 kW, 3 kWh 20s15p Li-Ion battery pack.
+
+---
+
+## Other Notable Projects
+
+- **CO2 Solution**: Satellite-monitored CO2 transparency system with blockchain-inspired accountability — https://co2.eliaspfeffer.de
+- **Tesla Solar Charging Automation**: Starts/stops Tesla charging based on solar panel output via Poweropti sensor
+- **Janko Piano**: 3D-printed Janko-layout piano with custom keys and frame (CAD in SolidWorks)
+- **Aquaponic System**: Closed-loop fish farming + hydroponics system
+- **Book: Self-Repeating Systems**: Summary of the most common self-perpetuating systems in the world
+- **Reasoning Model for AGI**: Mathematical logic for linking contexts in a knowledge graph
+- **Bitcoin Gas Station App**: Android prototype for buying Bitcoin at gas stations
+- **LifePathPlaner**: Plan long-term life paths and model the impact of lifestyle changes
+- **Kraken Safe Fees**: Automates Bitcoin DCA via Kraken API at 0.2–0.4% fees
+
+---
+
+## Contact & Links
+
+- Website: https://eliaspfeffer.de
+- Email: eliaspfeffer@gmail.com
+- GitHub: https://github.com/eliaspfeffer
+- LinkedIn: https://www.linkedin.com/in/eliaspfeffer/
+- AI Project: https://ai.eliaspfeffer.de
+- Trading Algorithm: https://meshresearch.xyz
+- AI-CTO Service: https://cto.eliaspfeffer.de/
