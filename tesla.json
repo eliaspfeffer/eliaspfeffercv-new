@@ -1,0 +1,40 @@
+Sure, you can paste the following text into a new GPT:
+
+Generate a 4K, 9:16 photorealistic ad creative using this JSON:
+```json
+{
+  "format": "horizontal",
+  "realism": "ultra realistic",
+  "product_name": "“25 Guns” Taskforce Engineer (m/f/d)",
+  "headline": "A force behind Giga Berlin’s Success",
+  "subheadline": "Tesla’s Elite 25 Guns Taskforce",
+  "location": "Gigafactory Berlin-Brandenburg, Grünheide (Mark), Germany",
+  "brand": "Tesla",
+  "background_image_description": "Tesla Gigafactory Berlin-Brandenburg under construction, dramatic lighting with engineers in safety vests actively working on-site, visible steel beams and modern industrial elements, with a sleek Tesla logo subtly present.",
+  "foreground_elements": [
+    {
+      "type": "person",
+      "description": "Confident engineer in Tesla-branded gear, holding a tablet and pointing toward construction plans, helmet on, standing near a structural framework inside the Gigafactory."
+    },
+    {
+      "type": "text_block",
+      "position": "bottom_left",
+      "text": "Solve high-impact challenges. Lead ramp-ups. Report directly to Elon Musk.",
+      "style": "bold, modern font, white on dark transparent background"
+    },
+  ],
+  "key_points": [
+    "Worked onsite at the Berlin Gigafactory",
+    "Critical-path engineering tasks across multiple departments",
+    "Hands-on problem-solving and real-time execution",
+    "Reported directly to Elon Musk on a daily basis",
+    "Required aniacal sense of urgency"
+  ],
+  "visual_tone": "bold, high-tech, urgent, aspirational",
+  "branding_elements": {
+    "logo": "Tesla logo in white or chrome finish",
+    "font": "Tesla custom font or modern sans-serif",
+    "color_palette": ["#000000", "#e82127", "#ffffff", "#d1d1d1"]
+  }
+}
+```
