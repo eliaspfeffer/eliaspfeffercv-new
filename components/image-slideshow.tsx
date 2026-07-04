@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -15,13 +15,11 @@ interface ImageSlideshowProps {
 }
 
 export function ImageSlideshow({ slides }: ImageSlideshowProps) {
+  const rootRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [slidesLoaded, setSlidesLoaded] = useState<boolean[]>([]);
-
-  // Initialize slides loaded state
-  useEffect(() => {
-    setSlidesLoaded(new Array(slides.length).fill(false));
-  }, [slides.length]);
+  const [isInView, setIsInView] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [hasCompletedAutoplay, setHasCompletedAutoplay] = useState(false);
 
   const nextSlide = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -33,65 +31,104 @@ export function ImageSlideshow({ slides }: ImageSlideshowProps) {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
-  // Preload all slides when component mounts
   useEffect(() => {
-    slides.forEach((slide, index) => {
-      const imgElement = document.createElement("img");
-      imgElement.src = slide.imageUrl;
-      imgElement.onload = () => {
-        setSlidesLoaded((prev) => {
-          const newState = [...prev];
-          newState[index] = true;
-          return newState;
-        });
-      };
-    });
-  }, [slides]);
+    const element = rootRef.current;
+
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { threshold: 0.35 }
+    );
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (
+      !isInView ||
+      isHovered ||
+      hasCompletedAutoplay ||
+      slides.length <= 1 ||
+      currentSlide >= slides.length - 1
+    ) {
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setCurrentSlide((prev) => {
+        const nextIndex = prev + 1;
+
+        return nextIndex;
+      });
+    }, 2000);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [currentSlide, hasCompletedAutoplay, isHovered, isInView, slides.length]);
+
+  useEffect(() => {
+    if (
+      !isInView ||
+      isHovered ||
+      hasCompletedAutoplay ||
+      slides.length <= 1 ||
+      currentSlide !== slides.length - 1
+    ) {
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setCurrentSlide(0);
+      setHasCompletedAutoplay(true);
+    }, 2000);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [currentSlide, hasCompletedAutoplay, isHovered, isInView, slides.length]);
 
   return (
-    <div className="relative w-full" onClick={(e) => e.stopPropagation()}>
+    <div
+      ref={rootRef}
+      className="relative w-full"
+      onClick={(e) => e.stopPropagation()}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div className="relative w-full overflow-hidden rounded-lg">
         <div
-          className="relative"
+          className="relative overflow-hidden rounded-lg"
           style={{
             width: "100%",
             paddingBottom: "0",
-            height: "auto",
             minHeight: "300px",
           }}
         >
-          <Image
-            src={slides[currentSlide].imageUrl || "/placeholder.svg"}
-            alt={`Slide ${currentSlide + 1}`}
-            fill={false}
-            width={1200}
-            height={800}
-            className="w-full h-auto rounded-lg"
-            style={{
-              maxWidth: "100%",
-              height: "auto",
-              objectFit: "contain",
-              background: "transparent",
-            }}
-            priority={true}
-          />
-
-          {/* Hidden preloader for all slides */}
-          <div className="hidden">
-            {slides.map(
-              (slide, index) =>
-                index !== currentSlide && (
-                  <Image
-                    key={`preload-${index}`}
-                    src={slide.imageUrl}
-                    alt="Preloaded slide"
-                    width={1}
-                    height={1}
-                    priority={index === (currentSlide + 1) % slides.length}
-                    loading="eager"
-                  />
-                )
-            )}
+          <div
+            className="flex transition-transform duration-500 ease-in-out"
+            style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+          >
+            {slides.map((slide, index) => (
+              <div
+                key={slide.imageUrl}
+                className="relative flex min-w-full items-center justify-center"
+                style={{ minHeight: "300px" }}
+              >
+                <Image
+                  src={slide.imageUrl || "/placeholder.svg"}
+                  alt={`Slide ${index + 1}`}
+                  width={1200}
+                  height={800}
+                  className="h-auto w-full rounded-lg"
+                  style={{
+                    maxWidth: "100%",
+                    objectFit: "contain",
+                    background: "transparent",
+                  }}
+                  priority={index === 0}
+                />
+              </div>
+            ))}
           </div>
         </div>
         {slides.length > 1 && (

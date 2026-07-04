@@ -11,61 +11,160 @@ import { Badge } from "@/components/ui/badge";
 import {
   Bitcoin,
   Car,
-  Cpu,
   Zap,
   ExternalLink,
-  AirVent,
   Brain,
-  BrainCircuit,
-  BrainCircuitIcon,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import Link from "next/link";
 import Image from "next/image";
-import useEmblaCarousel from "embla-carousel-react";
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 
 // ProjectImage component for standardized project screenshots
 interface ProjectImageProps {
-  src: string | string[];
+  src: string | ImageObject | (string | ImageObject)[];
   alt: string;
+  paused?: boolean;
 }
 
-function ImageCarousel({ images, alt }: { images: string[]; alt: string }) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+interface ImageObject {
+  url: string;
+  objectFit?: "cover" | "contain";
+}
+
+interface Project {
+  title: string;
+  description: string;
+  icon: ReactNode;
+  tags: string[];
+  date: string;
+  link?: string;
+  image?: ProjectImageProps["src"];
+}
+
+function ImageCarousel({
+  images,
+  alt,
+  paused = false,
+}: {
+  images: (string | ImageObject)[];
+  alt: string;
+  paused?: boolean;
+}) {
+  const rootRef = useRef<HTMLDivElement>(null);
+  const [isInView, setIsInView] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [hasCompletedAutoplay, setHasCompletedAutoplay] = useState(false);
 
   const scrollPrev = useCallback(
     (e: React.MouseEvent) => {
       e.stopPropagation();
-      if (emblaApi) emblaApi.scrollPrev();
+      setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
     },
-    [emblaApi]
+    [images.length]
   );
 
   const scrollNext = useCallback(
     (e: React.MouseEvent) => {
       e.stopPropagation();
-      if (emblaApi) emblaApi.scrollNext();
+      setCurrentIndex((prev) => (prev + 1) % images.length);
     },
-    [emblaApi]
+    [images.length]
   );
 
+  useEffect(() => {
+    const element = rootRef.current;
+
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { threshold: 0.35 }
+    );
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (
+      paused ||
+      !isInView ||
+      hasCompletedAutoplay ||
+      images.length <= 1 ||
+      currentIndex >= images.length - 1
+    ) {
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setCurrentIndex((prev) => {
+        const nextIndex = prev + 1;
+
+        return nextIndex;
+      });
+    }, 2000);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [currentIndex, hasCompletedAutoplay, images.length, isInView, paused]);
+
+  useEffect(() => {
+    if (
+      paused ||
+      !isInView ||
+      hasCompletedAutoplay ||
+      images.length <= 1 ||
+      currentIndex !== images.length - 1
+    ) {
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setCurrentIndex(0);
+      setHasCompletedAutoplay(true);
+    }, 2000);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [currentIndex, hasCompletedAutoplay, images.length, isInView, paused]);
+
   return (
-    <div className="relative" onClick={(e) => e.stopPropagation()}>
-      <div className="overflow-hidden rounded-lg" ref={emblaRef}>
-        <div className="flex">
-          {images.map((src, index) => (
-            <div key={index} className="relative aspect-[16/9] min-w-full">
-              <Image
-                src={src}
-                alt={`${alt} ${index + 1}`}
-                width={1200}
-                height={675}
-                className="object-cover w-full"
-              />
-            </div>
-          ))}
+    <div
+      ref={rootRef}
+      className="relative"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className="overflow-hidden rounded-lg">
+        <div
+          className="flex transition-transform duration-500 ease-in-out"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {images.map((image, index) => {
+            const src = typeof image === "string" ? image : image.url;
+            const objectFit =
+              typeof image === "string" ? "cover" : image.objectFit || "cover";
+
+            return (
+              <div
+                key={index}
+                className={`relative min-w-full overflow-hidden rounded-lg ${
+                  objectFit === "contain" ? "aspect-[4/3]" : "aspect-[16/9]"
+                }`}
+              >
+                <Image
+                  src={src}
+                  alt={`${alt} ${index + 1}`}
+                  fill
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  className={
+                    objectFit === "contain"
+                      ? "rounded-lg object-contain"
+                      : "rounded-lg object-cover"
+                  }
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
       <button
@@ -84,11 +183,11 @@ function ImageCarousel({ images, alt }: { images: string[]; alt: string }) {
   );
 }
 
-function ProjectImage({ src, alt }: ProjectImageProps) {
+function ProjectImage({ src, alt, paused = false }: ProjectImageProps) {
   if (Array.isArray(src)) {
     return (
       <div className="mb-4" onClick={(e) => e.stopPropagation()}>
-        <ImageCarousel images={src} alt={alt} />
+        <ImageCarousel images={src} alt={alt} paused={paused} />
       </div>
     );
   }
@@ -99,18 +198,64 @@ function ProjectImage({ src, alt }: ProjectImageProps) {
       onClick={(e) => e.stopPropagation()}
     >
       <Image
-        src={src}
+        src={typeof src === "string" ? src : src.url}
         alt={alt}
         width={1200}
         height={675}
-        className="object-cover w-full"
+        className={`w-full ${
+          typeof src !== "string" && src.objectFit === "contain"
+            ? "object-contain"
+            : "object-cover"
+        }`}
       />
     </div>
   );
 }
 
 export function Projects() {
-  const projects = [
+  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+  const projects: Project[] = [
+    {
+      title: "Built an Electric ATV",
+      description:
+        "Custom-built electric atv (0-100km/h in ~3.6s; 60 kW with 6 kWh battery)",
+      icon: <Car className="h-6 w-6" />,
+      tags: ["Hardware", "Engineering", "Electric Vehicles", "Battery", "BMS"],
+      date: "2019-2020",
+      link: "https://endless-sphere.com/sphere/threads/my-60kw-electric-atv-quad-built.122397/#post-1787638",
+      image: [
+        {
+          url: "/pics/quad/quad11.jpeg",
+          objectFit: "contain",
+        },
+        {
+          url: "/pics/quad/quad2.jpeg",
+          objectFit: "contain",
+        },
+        {
+          url: "/pics/quad/quad7.jpg",
+          objectFit: "contain",
+        },
+        {
+          url: "/pics/quad/quad9.jpeg",
+          objectFit: "contain",
+        },
+        {
+          url: "/pics/quad/quad6.jpg",
+          objectFit: "contain",
+        },
+      ],
+    },
+    {
+      title: "Built Embodied World Model Architecture",
+      icon: <Brain className="h-6 w-6" />,
+      description:
+        "Built a self-thinking consciousness (not a LLM or GPT wrapper or similar) architecture for humanoids / embodied world model architecture",
+      link: "https://dontkillmy.computer",
+      tags: ["AGI"],
+      date: "2025-now",
+      image: "/pics/dkmc-screenshot.png",
+    },
     {
       title: "Built a profitable trading algorithm",
       description:
@@ -128,11 +273,11 @@ export function Projects() {
       ],
       date: "2024-now",
       link: "https://meshresearch.xyz",
-      image: "/pics/websites/meshresearch.jpg",
+      image: "/pics/screening-screenshot.png",
     },
     {
       title: "Engineered BitChat",
-      description: "Wrote a software for buying, selling, and sending Bitcoin. Also built bit-chat.me — the website for BitChat.",
+      description: "Wrote a software for buying, selling, and sending Bitcoin by writing a text message. Also built bit-chat.me — the website for BitChat.",
       icon: <Zap className="h-6 w-6" />,
       tags: [
         "Java",
@@ -145,33 +290,7 @@ export function Projects() {
       ],
       date: "2023-now",
       link: "https://bit-chat.me",
-      image: ["/pics/websites/bitchatme.jpg", "/pics/bitcoinbank2.png", "/pics/bitcoinbank3.png"],
-    },
-    {
-      title: "Built an Electric ATV",
-      description:
-        "Custom-built electric atv (0-100km/h in ~3.6s; 60 kW with 6 kWh battery)",
-      icon: <Car className="h-6 w-6" />,
-      tags: ["Hardware", "Engineering", "Electric Vehicles", "Battery", "BMS"],
-      date: "2019-2020",
-      link: "https://endless-sphere.com/sphere/threads/my-60kw-electric-atv-quad-built.122397/#post-1787638",
-      image: [
-        "/pics/quad/quad11.jpeg",
-        "/pics/quad/quad2.jpeg",
-        "/pics/quad/quad7.jpg",
-        "/pics/quad/quad9.jpeg",
-        "/pics/quad/quad6.jpg",
-      ],
-    },
-    {
-      title: "Artifical Consciousness Model",
-      icon: <Brain className="h-6 w-6" />,
-      description:
-        "Built a self-thinking consciousness (not a LLM or GPT wrapper or similar). Basically a try, to copy the systematic behavior of a human mind: It always tries to find the best 'path' to be happy by going along 'paths', depending on how much energy it has, what the predicted reward is, how much energy it takes to go there (e.g. the further away from the 'reward-honeypot' like eat, sleep, regerate, the higher the total energy cost is). It never stops thinking, has its own motivation and finds the best 'path' / next step to do through associative thoughts and also has emotions as model parameters. You can have a conversation with it, but it needs more data to know more.",
-      link: "https://ai.eliaspfeffer.de",
-      tags: ["AGI"],
-      date: "2025-now",
-      image: "/pics/ai.png",
+      image: "/pics/websites/bitchatme.jpg",
     },
   ];
 
@@ -182,7 +301,12 @@ export function Projects() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((project, i) =>
             project.link ? (
-              <Card key={i} className="h-full">
+              <Card
+                key={i}
+                className="h-full"
+                onMouseEnter={() => setHoveredProject(i)}
+                onMouseLeave={() => setHoveredProject(null)}
+              >
                 <div
                   className="cursor-pointer h-full"
                   onClick={() => window.open(project.link, "_blank")}
@@ -208,6 +332,7 @@ export function Projects() {
                         <ProjectImage
                           src={project.image}
                           alt={`Screenshot of ${project.title}`}
+                          paused={hoveredProject === i}
                         />
                       </div>
                     )}
@@ -225,7 +350,11 @@ export function Projects() {
                 </div>
               </Card>
             ) : (
-              <Card key={i}>
+              <Card
+                key={i}
+                onMouseEnter={() => setHoveredProject(i)}
+                onMouseLeave={() => setHoveredProject(null)}
+              >
                 <CardHeader>
                   <div className="flex items-center gap-2">
                     {project.icon}
@@ -242,6 +371,7 @@ export function Projects() {
                     <ProjectImage
                       src={project.image}
                       alt={`Screenshot of ${project.title}`}
+                      paused={hoveredProject === i}
                     />
                   )}
                   <p className="text-zinc-600 dark:text-zinc-400 mb-4">

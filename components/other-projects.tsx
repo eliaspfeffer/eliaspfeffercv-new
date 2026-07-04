@@ -1,12 +1,10 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
-import Link from "next/link";
 import Image from "next/image";
-import useEmblaCarousel from "embla-carousel-react";
 
 // Definiere Schnittstellen für die Bildtypen
 interface ImageObject {
@@ -29,32 +27,100 @@ interface Project {
 function ImageCarousel({
   images,
   alt,
+  paused = false,
 }: {
   images: (string | ImageObject)[];
   alt: string;
+  paused?: boolean;
 }) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const rootRef = useRef<HTMLDivElement>(null);
+  const [isInView, setIsInView] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [hasCompletedAutoplay, setHasCompletedAutoplay] = useState(false);
 
   const scrollPrev = useCallback(
     (e: React.MouseEvent) => {
       e.stopPropagation();
-      if (emblaApi) emblaApi.scrollPrev();
+      setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
     },
-    [emblaApi]
+    [images.length]
   );
 
   const scrollNext = useCallback(
     (e: React.MouseEvent) => {
       e.stopPropagation();
-      if (emblaApi) emblaApi.scrollNext();
+      setCurrentIndex((prev) => (prev + 1) % images.length);
     },
-    [emblaApi]
+    [images.length]
   );
 
+  useEffect(() => {
+    const element = rootRef.current;
+
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { threshold: 0.35 }
+    );
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (
+      paused ||
+      !isInView ||
+      hasCompletedAutoplay ||
+      images.length <= 1 ||
+      currentIndex >= images.length - 1
+    ) {
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setCurrentIndex((prev) => {
+        const nextIndex = prev + 1;
+
+        return nextIndex;
+      });
+    }, 2000);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [currentIndex, hasCompletedAutoplay, images.length, isInView, paused]);
+
+  useEffect(() => {
+    if (
+      paused ||
+      !isInView ||
+      hasCompletedAutoplay ||
+      images.length <= 1 ||
+      currentIndex !== images.length - 1
+    ) {
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setCurrentIndex(0);
+      setHasCompletedAutoplay(true);
+    }, 2000);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [currentIndex, hasCompletedAutoplay, images.length, isInView, paused]);
+
   return (
-    <div className="relative" onClick={(e) => e.stopPropagation()}>
-      <div className="overflow-hidden rounded-lg" ref={emblaRef}>
-        <div className="flex">
+    <div
+      ref={rootRef}
+      className="relative"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className="overflow-hidden rounded-lg">
+        <div
+          className="flex transition-transform duration-500 ease-in-out"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
           {images.map((image, index) => {
             const src = typeof image === "string" ? image : image.url;
             const position =
@@ -126,52 +192,80 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
 
   // Combined projects including those from Experience and Featured Projects sections
   const projects: Project[] = [
     // === TOP IMPORTANT ===
     {
-      title: "Hire a AI-CTO",
+      title: "Built an AI-CTO",
       description: "Get a complete AI-powered technical department — frontend, backend, DevOps, and QA — with Claude Code as your Chief Technology Officer. One invoice. Ships to production. You only hear from us when it's done.",
       link: "https://cto.eliaspfeffer.de/",
       tags: ["Software Development"],
       image: "/pics/websites/cto.jpg",
     },
     {
-      title: "AI Orchestrator",
-      description: "Mindmap and canvas app with embedded interactive terminal nodes — build visual workflows by connecting terminal sessions and notes on an infinite canvas.",
-      link: "https://orchestrator.eliaspfeffer.de/",
-      tags: ["Software Development"],
-      image: "/pics/websites/orchestrator.jpg",
+      title: "Designed and 3D printed a Janko Piano",
+      description:
+        "A 3d printed Janko Piano with 3d printed keys and a 3d printed frame",
+      tags: ["Engineering", "other"],
+      link: "https://en.wikipedia.org/wiki/Jank%C3%B3_keyboard",
+      image: [
+        {
+          url: "/pics/janko_piano_solid_works_3D_print1.png",
+          objectFit: "contain",
+        },
+        {
+          url: "/pics/janko_piano_solid_works_3D_rendering.png",
+          objectFit: "contain",
+        },
+        {
+          url: "/pics/janko_piano_solid_works_3D_print2.png",
+          objectFit: "contain",
+        },
+      ],
+    },
+    {
+      title: "Built an Aquaponic System",
+      description:
+        "Built an aquaponic system combining fish farming with hydroponic plant cultivation in a closed-loop ecosystem.",
+      tags: ["Engineering", "other"],
+      link: "https://www.ghanaverein-allensbach.de/index.php/en/our-projects/projects-to-date/64-fishery-and-aquaponics-in-allensbach-too",
+      image: [
+        {
+          url: "/pics/aquaponic3.jpg",
+          objectFit: "contain",
+        },
+        {
+          url: "/pics/aquaponic.jpg",
+          objectFit: "contain",
+        },
+        {
+          url: "/pics/aquaponic2.jpg",
+          objectFit: "contain",
+        },
+      ],
+    },
+    {
+      title: "Wrote a Book about self repeating systems",
+      description: "My summary of the most common systems of the world",
+      link: "https://docs.google.com/document/d/13zCmPsjzuSZhTZ4gD9OR0kGw3jC52drX1SdriTpYrUo/edit?usp=sharing",
+      tags: ["other"],
+      image: [
+        {
+          url: "/pics/systeme_book.png",
+          position: "center",
+          objectFit: "contain",
+        },
+      ],
     },
     // === VERY IMPORTANT ===
-    {
-      title: "Mesh Research",
-      description: "A profitable trading algorithm — outperforms DCA, HODL, and Lump Sum strategies.",
-      link: "https://meshresearch.xyz/",
-      tags: ["Bitcoin", "Software Development"],
-      image: "/pics/websites/meshresearch.jpg",
-    },
-    {
-      title: "Longevity Protocol",
-      description: "Web app exploring longevity protocols and health optimization strategies with interactive content.",
-      link: "https://longevityprotocolof.vercel.app",
-      tags: ["Software Development"],
-      image: "/pics/websites/longevityprotocol.jpg",
-    },
     {
       title: "Minecraft HUD",
       description: "Minecraft-style HUD overlay for Mac and Windows that displays system info (battery, apps, activity) in a gaming interface with sound effects.",
       link: "https://minecrafthud.vercel.app",
       tags: ["Software Development"],
       image: "/pics/websites/minecrafthud.jpg",
-    },
-    {
-      title: "bit-chat.me",
-      description: "Bit-Chat messaging platform with integrated email identity management and verified mailbox namespaces.",
-      link: "https://bit-chat.me",
-      tags: ["Bitcoin", "Software Development"],
-      image: "/pics/websites/bitchatme.jpg",
     },
     {
       title: "Calendar365",
@@ -237,11 +331,25 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
     },
     // === IMPORTANT ===
     {
-      title: "Your Outreach Sucks",
-      description: "AI tool that rewrites and grades cold outreach messages so they don't suck.",
-      link: "https://youroutreachsucks.eliaspfeffer.de/",
+      title: "AI Orchestrator",
+      description: "Mindmap and canvas app with embedded interactive terminal nodes — build visual workflows by connecting terminal sessions and notes on an infinite canvas.",
+      link: "https://orchestrator.eliaspfeffer.de/",
       tags: ["Software Development"],
-      image: "/pics/websites/youroutreachsucks.jpg",
+      image: "/pics/websites/orchestrator.jpg",
+    },
+    {
+      title: "Mesh Research",
+      description: "A profitable trading algorithm — outperforms DCA, HODL, and Lump Sum strategies.",
+      link: "https://meshresearch.xyz/",
+      tags: ["Bitcoin", "Software Development"],
+      image: "/pics/websites/meshresearch.jpg",
+    },
+    {
+      title: "Longevity Protocol",
+      description: "Web app exploring longevity protocols and health optimization strategies with interactive content.",
+      link: "https://longevityprotocolof.vercel.app",
+      tags: ["Software Development"],
+      image: "/pics/websites/longevityprotocol.jpg",
     },
     {
       title: "FoundersMap",
@@ -251,13 +359,6 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
       image: "/pics/websites/foundersmap.jpg",
     },
     {
-      title: "Cursor Superhuman",
-      description: "Advanced techniques and workflows for AI-assisted development with Cursor — for superhuman productivity.",
-      link: "https://cursor-super-human.vercel.app",
-      tags: ["Software Development"],
-      image: "/pics/websites/cursor-super-human.jpg",
-    },
-    {
       title: "TikTok Skill Page",
       description: "Landing page showcasing TikTok-ready skills and content formats.",
       link: "https://tiktok.eliaspfeffer.de/",
@@ -265,61 +366,6 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
       image: "/pics/websites/tiktok.jpg",
     },
     // === MEDIUM TO IMPORTANT ===
-    {
-      title: "Designed and 3D printed a Janko Piano",
-      description:
-        "A 3d printed Janko Piano with 3d printed keys and a 3d printed frame",
-      tags: ["Engineering", "other"],
-      link: "https://en.wikipedia.org/wiki/Jank%C3%B3_keyboard",
-      image: [
-        {
-          url: "/pics/janko_piano_solid_works_3D_print1.png",
-          objectFit: "contain",
-        },
-        {
-          url: "/pics/janko_piano_solid_works_3D_rendering.png",
-          objectFit: "contain",
-        },
-        {
-          url: "/pics/janko_piano_solid_works_3D_print2.png",
-          objectFit: "contain",
-        },
-      ],
-    },
-    {
-      title: "Built an Aquaponic System",
-      description:
-        "Built an aquaponic system combining fish farming with hydroponic plant cultivation in a closed-loop ecosystem.",
-      tags: ["Engineering", "other"],
-      link: "https://www.ghanaverein-allensbach.de/index.php/en/our-projects/projects-to-date/64-fishery-and-aquaponics-in-allensbach-too",
-      image: [
-        {
-          url: "/pics/aquaponic3.jpg",
-          objectFit: "contain",
-        },
-        {
-          url: "/pics/aquaponic.jpg",
-          objectFit: "contain",
-        },
-        {
-          url: "/pics/aquaponic2.jpg",
-          objectFit: "contain",
-        },
-      ],
-    },
-    {
-      title: "Wrote a Book about self repeating systems",
-      description: "My summary of the most common systems of the world",
-      link: "https://docs.google.com/document/d/13zCmPsjzuSZhTZ4gD9OR0kGw3jC52drX1SdriTpYrUo/edit?usp=sharing",
-      tags: ["other"],
-      image: [
-        {
-          url: "/pics/systeme_book.png",
-          position: "center",
-          objectFit: "contain",
-        },
-      ],
-    },
     {
       title: "A possible solution to Climate Change",
       description:
@@ -398,12 +444,6 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
       ],
     },
     // === LOWER TO MEDIUM ===
-    {
-      title: "Kraken Safe Fees",
-      description: "Automates Bitcoin purchases via Kraken API at ~0.2–0.4% fees — cheaper than standard apps — with multiple DCA strategy support.",
-      tags: ["Bitcoin", "Software Development"],
-      image: "/pics/websites/kraken-safe-fees.jpg",
-    },
     {
       title: "make-fetch-json-pick-easy",
       description:
@@ -558,7 +598,12 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           {filteredProjects.map((project, i) =>
             project.link ? (
-              <Card key={i} className="h-full">
+              <Card
+                key={i}
+                className="h-full"
+                onMouseEnter={() => setHoveredProject(i)}
+                onMouseLeave={() => setHoveredProject(null)}
+              >
                 <div
                   className="cursor-pointer h-full"
                   onClick={() => window.open(project.link, "_blank")}
@@ -579,6 +624,7 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
                           <ImageCarousel
                             images={project.image}
                             alt={`Screenshots of ${project.title}`}
+                            paused={hoveredProject === i}
                           />
                         ) : (
                           <div
@@ -636,7 +682,11 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
                 </div>
               </Card>
             ) : (
-              <Card key={i}>
+              <Card
+                key={i}
+                onMouseEnter={() => setHoveredProject(i)}
+                onMouseLeave={() => setHoveredProject(null)}
+              >
                 <CardHeader>
                   <CardTitle>{project.title}</CardTitle>
                 </CardHeader>

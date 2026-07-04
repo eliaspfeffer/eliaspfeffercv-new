@@ -40,8 +40,8 @@ LinkedIn: https://www.linkedin.com/in/eliaspfeffer/
 - Description: Custom-built electric ATV achieving 0–100 km/h in ~3.6 seconds with 60 kW power and a 6 kWh battery pack. Built from scratch, including the battery management system (BMS).
 - Tags: Hardware, Engineering, Electric Vehicles, Battery, BMS
 
-### Artificial Consciousness Model
-- URL: https://ai.eliaspfeffer.de
+### Built Embodied World Model Architecture
+- URL: https://dontkillmy.computer
 - Description: A self-thinking consciousness model (not an LLM or GPT wrapper). It mimics the systematic behavior of a human mind — always tries to find the best "path" to maximize reward, has emotions as model parameters, and never stops thinking. Built with associative thought mechanisms and self-directed motivation.
 - Tags: AGI, AI, Python
 
@@ -85,11 +85,6 @@ LinkedIn: https://www.linkedin.com/in/eliaspfeffer/
 - Description: Benchmarks Nostr relay speeds using NIP-66 discovery, displaying response times and latencies in a live leaderboard.
 - Tags: Software Development, Bitcoin
 
-### Cursor Superhuman
-- URL: https://cursor-super-human.vercel.app
-- Description: Advanced techniques and workflows for AI-assisted development with Cursor for superhuman productivity.
-- Tags: Software Development
-
 ---
 
 ## Professional Experience
@@ -124,7 +119,6 @@ Built a custom electric bike: 0–100 km/h in ~4 s, 22 kW, 3 kWh 20s15p Li-Ion b
 - **Reasoning Model for AGI**: Mathematical logic for linking contexts in a knowledge graph
 - **Bitcoin Gas Station App**: Android prototype for buying Bitcoin at gas stations
 - **LifePathPlaner**: Plan long-term life paths and model the impact of lifestyle changes
-- **Kraken Safe Fees**: Automates Bitcoin DCA via Kraken API at 0.2–0.4% fees
 
 ---
 
@@ -134,6 +128,6 @@ Built a custom electric bike: 0–100 km/h in ~4 s, 22 kW, 3 kWh 20s15p Li-Ion b
 - Email: eliaspfeffer@gmail.com
 - GitHub: https://github.com/eliaspfeffer
 - LinkedIn: https://www.linkedin.com/in/eliaspfeffer/
-- AI Project: https://ai.eliaspfeffer.de
+- AI Project: https://dontkillmy.computer
 - Trading Algorithm: https://meshresearch.xyz
 - AI-CTO Service: https://cto.eliaspfeffer.de/

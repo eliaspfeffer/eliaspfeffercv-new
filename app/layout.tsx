@@ -145,8 +145,8 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "AI Consciousness Model",
-          url: "https://ai.eliaspfeffer.de",
+          name: "Built Embodied World Model Architecture",
+          url: "https://dontkillmy.computer",
           description:
             "A self-thinking consciousness model — not an LLM wrapper — that mimics the systematic behavior of a human mind.",
         },
