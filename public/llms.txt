@@ -32,7 +32,7 @@ LinkedIn: https://www.linkedin.com/in/eliaspfeffer/
 
 ### BitChat — Bitcoin Software & Messaging Platform
 - URL: https://bit-chat.me
-- Description: Software for buying, selling, and sending Bitcoin. Includes bit-chat.me, a messaging platform with integrated email identity management and verified mailbox namespaces.
+- Description: Wrote a software for buying, selling, and sending money / bitcoin / stablecoins by simply writing a text message.
 - Tags: Java, Python, Golang, Spring Boot, Bitcoin
 
 ### Electric ATV (60 kW Custom Build)
@@ -40,9 +40,9 @@ LinkedIn: https://www.linkedin.com/in/eliaspfeffer/
 - Description: Custom-built electric ATV achieving 0–100 km/h in ~3.6 seconds with 60 kW power and a 6 kWh battery pack. Built from scratch, including the battery management system (BMS).
 - Tags: Hardware, Engineering, Electric Vehicles, Battery, BMS
 
-### Built Embodied World Model Architecture
+### Built an Embodied World Model Architecture
 - URL: https://dontkillmy.computer
-- Description: A self-thinking consciousness model (not an LLM or GPT wrapper). It mimics the systematic behavior of a human mind — always tries to find the best "path" to maximize reward, has emotions as model parameters, and never stops thinking. Built with associative thought mechanisms and self-directed motivation.
+- Description: Built a self-thinking consciousness / embodied world model architecture for humanoid robots (not a LLM or GPT wrapper or similar).
 - Tags: AGI, AI, Python
 
 ### AI-CTO Service

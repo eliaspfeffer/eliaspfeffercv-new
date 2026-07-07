@@ -95,14 +95,20 @@ function YouTubeVideo({ url, title }: { url: string; title: string }) {
 }
 
 function PDFPreview({ url, title }: { url: string; title: string }) {
-  const handleOpenPDF = (e: React.MouseEvent) => {
+  const pdfHref = encodeURI(url);
+  const handlePDFClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    window.open(url, "_blank");
   };
 
   return (
     <div className="relative overflow-hidden rounded-lg mb-4 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 shadow-lg">
-      <div className="cursor-pointer relative w-full" onClick={handleOpenPDF}>
+      <a
+        href={pdfHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="cursor-pointer relative block w-full"
+        onClick={handlePDFClick}
+      >
         <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 bg-red-600 rounded flex items-center justify-center">
@@ -140,7 +146,7 @@ function PDFPreview({ url, title }: { url: string; title: string }) {
             </div>
           </div>
         </div>
-      </div>
+      </a>
     </div>
   );
 }
@@ -395,10 +401,10 @@ export function Projects() {
       ],
     },
     {
-      title: "Built Embodied World Model Architecture",
+      title: "Built an Embodied World Model Architecture",
       icon: <Brain className="h-6 w-6" />,
       description:
-        "Built a self-thinking consciousness (not a LLM or GPT wrapper or similar) architecture for humanoids / embodied world model architecture",
+        "Built a self-thinking consciousness / embodied world model architecture for humanoid robots (not a LLM or GPT wrapper or similar)",
       link: "https://dontkillmy.computer",
       tags: ["AGI"],
       date: "2025-now",
@@ -431,7 +437,8 @@ export function Projects() {
     },
     {
       title: "Engineered BitChat",
-      description: "Wrote a software for buying, selling, and sending Bitcoin by writing a text message. Also built bit-chat.me — the website for BitChat.",
+      description:
+        "Wrote a software for buying, selling, and sending money / bitcoin / stablecoins by simply writing a text message.",
       icon: <Zap className="h-6 w-6" />,
       tags: [
         "Java",

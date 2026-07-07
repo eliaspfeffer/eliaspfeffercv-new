@@ -140,15 +140,15 @@ const jsonLd = {
           name: "BitChat — Bitcoin Messaging & Wallet",
           url: "https://bit-chat.me",
           description:
-            "Software for buying, selling, and sending Bitcoin with integrated messaging.",
+            "Software for buying, selling, and sending money / bitcoin / stablecoins by simply writing a text message.",
         },
         {
           "@type": "ListItem",
           position: 3,
-          name: "Built Embodied World Model Architecture",
+          name: "Built an Embodied World Model Architecture",
           url: "https://dontkillmy.computer",
           description:
-            "A self-thinking consciousness model — not an LLM wrapper — that mimics the systematic behavior of a human mind.",
+            "Built a self-thinking consciousness / embodied world model architecture for humanoid robots (not a LLM or GPT wrapper or similar).",
         },
         {
           "@type": "ListItem",

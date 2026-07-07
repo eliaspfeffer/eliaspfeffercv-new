@@ -439,27 +439,6 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
     },
     // === FROM OTHER SECTIONS ===
     {
-      title: "BitcoinAlgoTra.de",
-      description:
-        "The Bitcoin Algo Trading bot with the highest profitability ever.",
-      link: "https://meshresearch.xyz",
-      tags: ["Bitcoin", "Software Development"],
-      isFromOtherSection: true,
-    },
-    {
-      title: "Quantitative Bitcoin Trading",
-      description:
-        "Im managing a 6 figure Bitcoin amount for others via self built, backtested trading algorithms.",
-      tags: ["Bitcoin", "Software Development"],
-      isFromOtherSection: true,
-      image: [
-        {
-          url: "/pics/quant_trading_analysis.png",
-          objectFit: "contain",
-        },
-      ],
-    },
-    {
       title: "Škoda Klement eBike Project",
       description:
         "Helped with the development of the first prototype and built the battery system for the Škoda Klement eBike project.",
@@ -479,13 +458,6 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
       description: "Developed and commercialized a custom eBike conversion kit",
       link: "https://www.linkedin.com/in/eliaspfeffer/details/projects/243288495/multiple-media-viewer/?profileId=ACoAADJpVdABKWLKeH7pZl3V_mP7bDRdpWwDyzM&treasuryMediaId=1722620527942",
       tags: ["Engineering"],
-      isFromOtherSection: true,
-    },
-    {
-      title: "Bitcoin Bank CBE",
-      description:
-        "Bitcoin software for buying, selling, and sending Bitcoin (Beta Phase)",
-      tags: ["Bitcoin", "Software Development"],
       isFromOtherSection: true,
     },
     {
