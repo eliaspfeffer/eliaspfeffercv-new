@@ -205,27 +205,6 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
       image: "/pics/websites/cto.jpg",
     },
     {
-      title: "Designed and 3D printed a Janko Piano",
-      description:
-        "A 3d printed Janko Piano with 3d printed keys and a 3d printed frame",
-      tags: ["Engineering", "other"],
-      link: "https://en.wikipedia.org/wiki/Jank%C3%B3_keyboard",
-      image: [
-        {
-          url: "/pics/janko_piano_solid_works_3D_print1.png",
-          objectFit: "contain",
-        },
-        {
-          url: "/pics/janko_piano_solid_works_3D_rendering.png",
-          objectFit: "contain",
-        },
-        {
-          url: "/pics/janko_piano_solid_works_3D_print2.png",
-          objectFit: "contain",
-        },
-      ],
-    },
-    {
       title: "Built an Aquaponic System",
       description:
         "Built an aquaponic system combining fish farming with hydroponic plant cultivation in a closed-loop ecosystem.",

@@ -32,16 +32,6 @@ export function Nav() {
             <button
               onClick={() =>
                 document
-                  .getElementById("experience")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
-              className="hover:text-primary"
-            >
-              Experience
-            </button>
-            <button
-              onClick={() =>
-                document
                   .getElementById("contact")
                   ?.scrollIntoView({ behavior: "smooth" })
               }
@@ -74,17 +64,6 @@ export function Nav() {
               className="block w-full text-left px-3 py-2 hover:text-primary"
             >
               Projects
-            </button>
-            <button
-              onClick={() => {
-                document
-                  .getElementById("experience")
-                  ?.scrollIntoView({ behavior: "smooth" });
-                setIsOpen(false);
-              }}
-              className="block w-full text-left px-3 py-2 hover:text-primary"
-            >
-              Experience
             </button>
             <button
               onClick={() => {

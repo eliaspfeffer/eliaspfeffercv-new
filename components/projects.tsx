@@ -10,15 +10,21 @@ import {
 import { Badge } from "@/components/ui/badge";
 import {
   Bitcoin,
+  Briefcase,
   Car,
   Zap,
   ExternalLink,
   Brain,
   ChevronLeft,
   ChevronRight,
+  GraduationCap,
+  Play,
+  Wrench,
 } from "lucide-react";
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import { ImageGallery } from "./image-gallery";
+import { ImageSlideshow } from "./image-slideshow";
 
 // ProjectImage component for standardized project screenshots
 interface ProjectImageProps {
@@ -38,8 +44,105 @@ interface Project {
   icon: ReactNode;
   tags: string[];
   date: string;
+  company?: string;
   link?: string;
   image?: ProjectImageProps["src"];
+  videoUrl?: string;
+  pdfUrl?: string;
+  slideshow?: {
+    slides: {
+      imageUrl: string;
+      description: string;
+    }[];
+  };
+  images?: {
+    url: string;
+    description: string;
+  }[];
+}
+
+function YouTubeVideo({ url, title }: { url: string; title: string }) {
+  const videoId = url.split("v=")[1]?.split("&")[0];
+  const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+
+  const handleOpenVideo = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    window.open(url, "_blank");
+  };
+
+  return (
+    <div className="relative overflow-hidden rounded-lg aspect-video mb-4">
+      <div
+        className="cursor-pointer relative w-full h-full"
+        onClick={handleOpenVideo}
+      >
+        <img
+          src={thumbnailUrl}
+          alt={`Thumbnail for ${title}`}
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+          <div className="bg-red-600 rounded-full p-4 shadow-lg">
+            <Play className="h-8 w-8 text-white" fill="white" />
+          </div>
+          <span className="absolute bottom-4 text-white font-medium bg-black/50 px-3 py-1 rounded-full text-sm">
+            Auf YouTube ansehen
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PDFPreview({ url, title }: { url: string; title: string }) {
+  const handleOpenPDF = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    window.open(url, "_blank");
+  };
+
+  return (
+    <div className="relative overflow-hidden rounded-lg mb-4 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 shadow-lg">
+      <div className="cursor-pointer relative w-full" onClick={handleOpenPDF}>
+        <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 bg-red-600 rounded flex items-center justify-center">
+              <span className="text-white text-xs font-bold">PDF</span>
+            </div>
+            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              {title}
+            </span>
+          </div>
+          <ExternalLink className="h-4 w-4 text-gray-500" />
+        </div>
+        <div className="relative p-6 min-h-[400px] bg-white dark:bg-gray-900 flex flex-col items-center justify-center text-center">
+          <div className="absolute inset-0 flex items-center justify-center opacity-10 dark:opacity-5">
+            <img
+              src="/pics/reutlingen_university.png"
+              alt="Reutlingen University"
+              className="max-w-full max-h-full object-contain"
+            />
+          </div>
+          <div className="relative z-10 flex flex-col items-center">
+            <div className="w-16 h-16 bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center mb-4">
+              <div className="w-8 h-8 bg-red-600 rounded flex items-center justify-center">
+                <span className="text-white text-sm font-bold">PDF</span>
+              </div>
+            </div>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2 bg-white/80 dark:bg-gray-900/80 px-3 py-1 rounded">
+              Bachelor Degree Certificate
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-4 bg-white/80 dark:bg-gray-900/80 px-3 py-1 rounded">
+              Click here to open the full certificate
+            </p>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 transition-colors shadow-lg">
+              <ExternalLink className="h-4 w-4" />
+              open PDF
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function ImageCarousel({
@@ -212,6 +315,51 @@ function ProjectImage({ src, alt, paused = false }: ProjectImageProps) {
   );
 }
 
+function ProjectMedia({
+  project,
+  paused,
+}: {
+  project: Project;
+  paused: boolean;
+}) {
+  return (
+    <>
+      {project.image && (
+        <div className="mb-4" onClick={(e) => e.stopPropagation()}>
+          <ProjectImage
+            src={project.image}
+            alt={`Screenshot of ${project.title}`}
+            paused={paused}
+          />
+        </div>
+      )}
+      {project.videoUrl && (
+        <div onClick={(e) => e.stopPropagation()}>
+          <YouTubeVideo
+            url={project.videoUrl}
+            title={`Video for ${project.title}`}
+          />
+        </div>
+      )}
+      {project.pdfUrl && (
+        <div className="mb-4" onClick={(e) => e.stopPropagation()}>
+          <PDFPreview url={project.pdfUrl} title={project.title} />
+        </div>
+      )}
+      {project.slideshow && (
+        <div className="mb-4" onClick={(e) => e.stopPropagation()}>
+          <ImageSlideshow slides={project.slideshow.slides} />
+        </div>
+      )}
+      {project.images && (
+        <div className="mb-4" onClick={(e) => e.stopPropagation()}>
+          <ImageGallery images={project.images} />
+        </div>
+      )}
+    </>
+  );
+}
+
 export function Projects() {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const projects: Project[] = [
@@ -273,7 +421,13 @@ export function Projects() {
       ],
       date: "2024-now",
       link: "https://meshresearch.xyz",
-      image: "/pics/screening-screenshot.png",
+      image: [
+        "/pics/screening-screenshot.png",
+        {
+          url: "/pics/quant_trading_analysis.png",
+          objectFit: "contain",
+        },
+      ],
     },
     {
       title: "Engineered BitChat",
@@ -291,6 +445,134 @@ export function Projects() {
       date: "2023-now",
       link: "https://bit-chat.me",
       image: "/pics/websites/bitchatme.jpg",
+    },
+    {
+      title: "Škoda Klement eBike Project",
+      company: "BFO Mobility / ŠKODA",
+      description:
+        "Helped with the development of the first prototype and built the battery system for the Škoda Klement eBike project.",
+      icon: <Wrench className="h-6 w-6" />,
+      tags: ["Hardware", "Prototyping", "Engineering"],
+      date: "2018 - 2019",
+      slideshow: {
+        slides: [
+          {
+            imageUrl: "/pics/skoda1.jpg",
+            description: "The final Škoda Klement eBike",
+          },
+          {
+            imageUrl: "/pics/skoda2.jpg",
+            description:
+              "Škoda Klement eBike prototype. My part at this stage: everything around the (double-) battery",
+          },
+        ],
+      },
+    },
+    {
+      title: "Built a DIY eBike Kit",
+      company: "Personal Project",
+      description: "Developed and sold a custom eBike conversion kit",
+      icon: <Wrench className="h-6 w-6" />,
+      tags: ["Hardware", "Engineering", "Entrepreneurship"],
+      date: "2017 - 2018",
+      link: "https://www.linkedin.com/in/eliaspfeffer/details/projects/243288495/multiple-media-viewer/?profileId=ACoAADJpVdABKWLKeH7pZl3V_mP7bDRdpWwDyzM&treasuryMediaId=1722620527942",
+      images: [
+        {
+          url: "/pics/DIY_ebike_kit.png",
+          description: "The DIY eBike Kit",
+        },
+        {
+          url: "/pics/DIY_ebike_kit2.jpg",
+          description:
+            "Here you can see cooling fins for the rear motor for faster cooling",
+        },
+      ],
+    },
+    {
+      title: "Built a High-Performance DIY Electric Bike",
+      company: "Personal Project",
+      description:
+        "Built a custom electric bike achieving 0-100km/h in ~4s with 22kW power and a custom 3kWh 20s15p Li-Ion Battery",
+      icon: <Wrench className="h-6 w-6" />,
+      tags: ["Hardware", "Engineering"],
+      date: "2016 - 2017",
+      link: "https://www.linkedin.com/in/eliaspfeffer/details/projects/urn:li:fsd_profileProject:(ACoAADJpVdABKWLKeH7pZl3V_mP7bDRdpWwDyzM,403655932)/treasury/",
+      images: [
+        {
+          url: "/pics/ebike_hp1.jpg",
+          description: "The completed high-performance electric bike",
+        },
+        {
+          url: "/pics/ebike_hp2.jpg",
+          description: "Close-up view of the bike",
+        },
+        {
+          url: "/pics/ebike_spotwelding.jpg",
+          description:
+            "Custom battery pack assembly with nickel strips and 18650 cells",
+        },
+        {
+          url: "/pics/ebike/ebike_insideview.jpg",
+          description: "Inside view of the bike",
+        },
+        {
+          url: "/pics/ebike/ebike_elias_spotwelding.jpg",
+          description:
+            "Me, spotwelding the battery pack with a DIY spot welder out of a microwave",
+        },
+      ],
+    },
+    {
+      title: 'TESLA "25 Guns Taskforce" Working Student',
+      company: "TESLA - Berlin",
+      description:
+        "I've met Elon & asked him for a job, then got hired for the 25 Guns Taskforce and saved Tesla €1.1M in construction damage prevention. Then I've helped accelerate the construction of the GIGA Berlin Factory, reported directly to E, assisted in the IPCEI-funding program setup for Tesla and helped hiring the other 25 Guns Taskforce members.",
+      icon: <Briefcase className="h-6 w-6" />,
+      tags: ["Project Management", "Construction", "Problem Solving"],
+      date: "10/2020 - 02/2021",
+      link: "https://www.tesla.com/",
+      videoUrl: "https://www.youtube.com/watch?v=My6_QzM-Tlk",
+    },
+    {
+      title: "Bachelor of Engineering (B.Eng.)",
+      company: "Mechatronics with focus on automation",
+      description:
+        "I'm an Engineer in Mechatronics: combining mechanical engineering, electronics, and computer science.",
+      icon: <GraduationCap className="h-6 w-6" />,
+      tags: [
+        "Mechatronics",
+        "Automation",
+        "Engineering",
+        "C++",
+        "CAD (SolidWorks)",
+        "Assembler",
+        "Verilog",
+      ],
+      date: "2019 - 2025",
+      pdfUrl: "/pics/Elias Bachelor Degree.pdf",
+    },
+    {
+      title: "Designed and 3D printed a Janko Piano",
+      description:
+        "A 3d printed Janko Piano with 3d printed keys and a 3d printed frame",
+      icon: <Wrench className="h-6 w-6" />,
+      tags: ["Engineering", "3D Printing", "CAD"],
+      date: "2025",
+      link: "https://en.wikipedia.org/wiki/Jank%C3%B3_keyboard",
+      image: [
+        {
+          url: "/pics/janko_piano_solid_works_3D_print1.png",
+          objectFit: "contain",
+        },
+        {
+          url: "/pics/janko_piano_solid_works_3D_rendering.png",
+          objectFit: "contain",
+        },
+        {
+          url: "/pics/janko_piano_solid_works_3D_print2.png",
+          objectFit: "contain",
+        },
+      ],
     },
   ];
 
@@ -319,23 +601,19 @@ export function Projects() {
                           {project.title}
                           <ExternalLink className="h-4 w-4 inline-block" />
                         </CardTitle>
-                        <CardDescription>{project.date}</CardDescription>
+                        <CardDescription>
+                          {project.company
+                            ? `${project.company} • ${project.date}`
+                            : project.date}
+                        </CardDescription>
                       </div>
                     </div>
                   </CardHeader>
                   <CardContent>
-                    {project.image && (
-                      <div
-                        className="mb-4"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <ProjectImage
-                          src={project.image}
-                          alt={`Screenshot of ${project.title}`}
-                          paused={hoveredProject === i}
-                        />
-                      </div>
-                    )}
+                    <ProjectMedia
+                      project={project}
+                      paused={hoveredProject === i}
+                    />
                     <p className="text-zinc-600 dark:text-zinc-400 mb-4">
                       {project.description}
                     </p>
@@ -362,18 +640,19 @@ export function Projects() {
                       <CardTitle className="flex items-center gap-2">
                         {project.title}
                       </CardTitle>
-                      <CardDescription>{project.date}</CardDescription>
+                      <CardDescription>
+                        {project.company
+                          ? `${project.company} • ${project.date}`
+                          : project.date}
+                      </CardDescription>
                     </div>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  {project.image && (
-                    <ProjectImage
-                      src={project.image}
-                      alt={`Screenshot of ${project.title}`}
-                      paused={hoveredProject === i}
-                    />
-                  )}
+                  <ProjectMedia
+                    project={project}
+                    paused={hoveredProject === i}
+                  />
                   <p className="text-zinc-600 dark:text-zinc-400 mb-4">
                     {project.description}
                   </p>
