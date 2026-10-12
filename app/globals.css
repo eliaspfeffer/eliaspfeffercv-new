@@ -178,6 +178,7 @@ input { caret-color: #345843; }
   .intro-identity, .intro-details { padding: 0; }
 }
 
+@media (min-width: 1100px) {
 /* Translucent material keeps the real skyline behind each readable panel. */
 .portrait-portfolio {
   --glass-fill: rgba(245, 249, 255, .82);
@@ -206,16 +207,10 @@ input { caret-color: #345843; }
 .project-filters button, .newsletter-topic { border-radius: 12px; }
 .intro-link:hover { color: #235575; }
 
-@media (max-width: 1099px) {
-  .intro-identity, .intro-details { padding: 1.5rem; }
-  .portrait-portfolio #projects h2,
-  .portrait-portfolio #other-projects > div > h2 { padding: 1.5rem; }
-  .portrait-portfolio .project-grid > div > div > div,
-  .portrait-portfolio .project-grid > div > div.p-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
-}
 @media (prefers-contrast: more) {
   .portrait-portfolio { --glass-fill: rgba(245, 249, 255, .97); }
 }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .portrait-portfolio { --glass-fill: rgba(245, 249, 255, .97); }
+}
 }

@@ -141,7 +141,8 @@
       "edge": "rgba(255,255,255,.65)",
       "backdropFilter": "blur(24px) saturate(150%)",
       "radius": "24px",
-      "fallbackOpacity": 0.97
+      "fallbackOpacity": 0.97,
+      "minWidth": "1100px"
     }
   },
   "components": [

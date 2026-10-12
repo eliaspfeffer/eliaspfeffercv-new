@@ -23,3 +23,5 @@ TypeScript passes. The single Impeccable detector run returned no findings. Pare
 Captures supplied by the parent: portrait-desktop.jpg, portrait-scroll.jpg and portrait-mobile.jpg in the chat outputs directory. Independent finish review found no visual blockers. Its documentation fix (missing product/design context) was addressed with PRODUCT.md, DESIGN.md and the design sidecar. Review was limited to the supplied captures, source and parent browser evidence.
 
 Liquid Glass refinement: native backdrop blur and saturation, translucent fill and edge highlights replace opaque side-panel material. Dark Reader QA: body contrast >=4.95:1 under worst-case white backdrop, filters click/Space, last item and mobile 338/400px layouts pass. The prior opaque portrait version remains on design/centered-portrait.
+
+Glass material applies only at widths >=1100px, matching the sticky portrait layout. At <=1099px all panels, spacing and controls inherit the previous opaque portrait branch without glass frames.
