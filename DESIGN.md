@@ -45,7 +45,7 @@ components:
     rounded: "{rounded.topic}"
     padding: "0.55rem 0.75rem"
   project-panel:
-    backgroundColor: "rgba(245,249,255,.82)"
+    backgroundColor: "rgba(245,249,255,.76)"
     textColor: "{colors.ink}"
     rounded: "{rounded.glass}"
     padding: "24px"
@@ -105,6 +105,10 @@ Carousel controls have accessible labels. Image autoplay is disabled when reduce
 
 ## Liquid Glass branch
 
-On design/liquid-glass the side panels use rgba(245,249,255,.82), a subtle diagonal highlight, a translucent white edge, 24px corners and backdrop blur(24px) saturate(150%). This requested material replaces opaque paper on intro panels, project cards, section labels and project filters. The real photograph and reserved central corridor remain. Dark Reader is allowed to transform colors normally. More-contrast preferences and browsers without backdrop-filter use a .97 opacity fallback. Glass applies only at widths >=1100px. Below that breakpoint the entire material refinement is inactive and the previous frameless portrait layout is restored.
+On design/liquid-glass the side panels use rgba(245,249,255,.76), a subtle diagonal highlight, a translucent white edge, 28px corners and backdrop blur(12px) saturate(165%). This requested material replaces opaque paper on intro panels, project cards, section labels and project filters. The real photograph and reserved central corridor remain. Dark Reader is allowed to transform colors normally. More-contrast preferences and browsers without backdrop-filter use a .97 opacity fallback. Glass applies only at widths >=1100px. Below that breakpoint the entire material refinement is inactive and the previous frameless portrait layout is restored.
 
-Browser verification with active Dark Reader measured a conservative body-text contrast of 4.95:1 even when composited over a white backdrop; its dark highlight can only improve that bound. Small-width layout, filter keyboard interaction and last project were checked without overflow. Native iOS rendering and other Dark Reader presets were not tested.
+Browser verification with active Dark Reader measured a conservative body-text contrast of 4.81:1 even when composited over a white backdrop; its dark highlight can only improve that bound. Small-width layout, filter keyboard interaction and last project were checked without overflow. Native iOS rendering and other Dark Reader presets were not tested.
+
+## Refined glass experiment
+
+Source reviewed: haider-nawaz/liquid-glass-skill, SwiftUI-focused Liquid Glass guidance, plus Apple custom-view documentation. Native SwiftUI glass APIs are unavailable on this website. This branch is a CSS approximation: clearer skyline sampling, 12px blur, 76% tint, 28px corners and non-interactive screen-blended specular edges. The user explicitly keeps glass on desktop project-content panels despite the source skill reserving native glass for navigation. Mobile remains frameless below 1100px. No native refraction or device-motion effect is claimed.

@@ -25,3 +25,5 @@ Captures supplied by the parent: portrait-desktop.jpg, portrait-scroll.jpg and p
 Liquid Glass refinement: native backdrop blur and saturation, translucent fill and edge highlights replace opaque side-panel material. Dark Reader QA: body contrast >=4.95:1 under worst-case white backdrop, filters click/Space, last item and mobile 338/400px layouts pass. The prior opaque portrait version remains on design/centered-portrait.
 
 Glass material applies only at widths >=1100px, matching the sticky portrait layout. At <=1099px all panels, spacing and controls inherit the previous opaque portrait branch without glass frames.
+
+Refinement branch design/liquid-glass-refined follows the user-pinned glass panel idea, drawing material guidance from the linked SwiftUI skill. 76% fill, 12px blur, 165% saturation and 28px corners reveal more skyline. Screen-blended edge overlay has pointer-events:none. Browser Dark Reader body contrast bound 4.81:1; mobile glass disabled; keyboard filtering passes. Backup checkpoint 79314d3 and backup/liquid-glass-before-refinement remain available.

@@ -137,10 +137,10 @@
       }
     ],
     "glassMaterial": {
-      "fill": "rgba(245,249,255,.82)",
-      "edge": "rgba(255,255,255,.65)",
-      "backdropFilter": "blur(24px) saturate(150%)",
-      "radius": "24px",
+      "fill": "rgba(245,249,255,.76)",
+      "edge": "rgba(255,255,255,.8)",
+      "backdropFilter": "blur(12px) saturate(165%)",
+      "radius": "28px",
       "fallbackOpacity": 0.97,
       "minWidth": "1100px"
     }
@@ -188,7 +188,7 @@
       "refersTo": "project-panel",
       "description": "Translucent blurred panel preserving project title, copy and media.",
       "html": "<article class=\"ds-project\"><h3><a href=\"#project\">Project title</a></h3><p>Existing project description and media are preserved.</p></article>",
-      "css": ".ds-project{background:rgba(245,249,255,.82);backdrop-filter:blur(24px) saturate(150%);border:1px solid rgba(255,255,255,.65);border-radius:24px;box-shadow:inset 0 1px 0 rgba(255,255,255,.65),0 12px 32px rgba(20,39,57,.12);color:#202823;padding:24px;font:.95rem/1.7 Inter,sans-serif}.ds-project h3{font-size:1.5rem;line-height:1.2;letter-spacing:-.025em;margin:0 0 16px}.ds-project p{color:#35424b}.ds-project a{color:inherit;text-decoration:none}.ds-project a:hover{text-decoration:underline;text-underline-offset:4px}.ds-project a:focus-visible { outline:2px solid #202823; outline-offset:4px; }"
+      "css": ".ds-project{background:rgba(245,249,255,.76);backdrop-filter:blur(12px) saturate(165%);border:1px solid rgba(255,255,255,.65);border-radius:28px;box-shadow:inset 0 1px 0 rgba(255,255,255,.65),0 12px 32px rgba(20,39,57,.12);color:#202823;padding:24px;font:.95rem/1.7 Inter,sans-serif}.ds-project h3{font-size:1.5rem;line-height:1.2;letter-spacing:-.025em;margin:0 0 16px}.ds-project p{color:#182933}.ds-project a{color:inherit;text-decoration:none}.ds-project a:hover{text-decoration:underline;text-underline-offset:4px}.ds-project a:focus-visible { outline:2px solid #202823; outline-offset:4px; }"
     }
   ],
   "narrative": {
