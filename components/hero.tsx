@@ -8,7 +8,10 @@ export function Hero() {
       <div className="intro-identity">
         <h1 id="intro-title">Elias<br />Pfeffer.</h1>
         <p className="intro-role">Mechatronics Engineer</p>
-        <a href="#projects" className="intro-link">Explore my projects <ArrowDown size={18} aria-hidden="true" /></a>
+        <div className="flex flex-wrap gap-x-5">
+          <a href="#projects" className="intro-link">Explore my projects <ArrowDown size={18} aria-hidden="true" /></a>
+          <a href="https://linkedin.com/in/eliaspfeffer" target="_blank" rel="noopener noreferrer" className="intro-link">Connect on LinkedIn <ArrowUpRight size={18} aria-hidden="true" /></a>
+        </div>
       </div>
       <div className="intro-details">
         <p className="intro-description">My public<br />project portfolio.</p>
