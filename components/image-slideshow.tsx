@@ -48,6 +48,7 @@ export function ImageSlideshow({ slides }: ImageSlideshowProps) {
 
   useEffect(() => {
     if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
       !isInView ||
       isHovered ||
       hasCompletedAutoplay ||
@@ -70,6 +71,7 @@ export function ImageSlideshow({ slides }: ImageSlideshowProps) {
 
   useEffect(() => {
     if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
       !isInView ||
       isHovered ||
       hasCompletedAutoplay ||
@@ -137,7 +139,8 @@ export function ImageSlideshow({ slides }: ImageSlideshowProps) {
               variant="ghost"
               size="icon"
               className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white/90 dark:bg-zinc-800/80 dark:hover:bg-zinc-800/90"
-              onClick={previousSlide}
+              aria-label="Previous project image"
+                  onClick={previousSlide}
             >
               <ChevronLeft className="h-4 w-4" />
             </Button>
@@ -145,7 +148,8 @@ export function ImageSlideshow({ slides }: ImageSlideshowProps) {
               variant="ghost"
               size="icon"
               className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white/90 dark:bg-zinc-800/80 dark:hover:bg-zinc-800/90"
-              onClick={nextSlide}
+              aria-label="Next project image"
+                  onClick={nextSlide}
             >
               <ChevronRight className="h-4 w-4" />
             </Button>
@@ -162,6 +166,7 @@ export function ImageSlideshow({ slides }: ImageSlideshowProps) {
           {slides.map((_, index) => (
             <button
               key={index}
+              aria-label={`Show slide ${index + 1}`}
               className={`h-1.5 w-1.5 rounded-full transition-all ${
                 index === currentSlide
                   ? "bg-primary w-3"

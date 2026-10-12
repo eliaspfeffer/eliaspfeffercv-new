@@ -48,6 +48,7 @@ export function ImageGallery({ images }: ImageGalleryProps) {
 
   useEffect(() => {
     if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
       !isInView ||
       isHovered ||
       hasCompletedAutoplay ||
@@ -70,6 +71,7 @@ export function ImageGallery({ images }: ImageGalleryProps) {
 
   useEffect(() => {
     if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
       !isInView ||
       isHovered ||
       hasCompletedAutoplay ||
@@ -139,6 +141,7 @@ export function ImageGallery({ images }: ImageGalleryProps) {
                   variant="ghost"
                   size="icon"
                   className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white/90 dark:bg-zinc-800/80 dark:hover:bg-zinc-800/90"
+                  aria-label="Previous project image"
                   onClick={previousImage}
                 >
                   <ChevronLeft className="h-4 w-4" />
@@ -147,6 +150,7 @@ export function ImageGallery({ images }: ImageGalleryProps) {
                   variant="ghost"
                   size="icon"
                   className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white/90 dark:bg-zinc-800/80 dark:hover:bg-zinc-800/90"
+                  aria-label="Next project image"
                   onClick={nextImage}
                 >
                   <ChevronRight className="h-4 w-4" />
@@ -170,6 +174,7 @@ export function ImageGallery({ images }: ImageGalleryProps) {
           {images.map((_, index) => (
             <button
               key={index}
+              aria-label={`Show image ${index + 1}`}
               className={`h-1.5 w-1.5 rounded-full transition-all ${
                 index === currentImage
                   ? "bg-primary w-3"

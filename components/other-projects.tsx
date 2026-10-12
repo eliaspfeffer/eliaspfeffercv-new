@@ -71,6 +71,7 @@ function ImageCarousel({
 
   useEffect(() => {
     if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
       paused ||
       !isInView ||
       hasCompletedAutoplay ||
@@ -93,6 +94,7 @@ function ImageCarousel({
 
   useEffect(() => {
     if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
       paused ||
       !isInView ||
       hasCompletedAutoplay ||
@@ -158,12 +160,14 @@ function ImageCarousel({
         <>
           <button
             className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 dark:bg-black/80 rounded-full p-2 hover:bg-white/90 dark:hover:bg-black/90 z-30"
+            aria-label="Previous project image"
             onClick={scrollPrev}
           >
             <ChevronLeft className="h-6 w-6" />
           </button>
           <button
             className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 dark:bg-black/80 rounded-full p-2 hover:bg-white/90 dark:hover:bg-black/90 z-30"
+            aria-label="Next project image"
             onClick={scrollNext}
           >
             <ChevronRight className="h-6 w-6" />
@@ -531,7 +535,7 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
           {filterTag ? `${filterTag} Projects` : "Other Projects & Publications"}
         </h2>
 
-        {!filterTag && <div className="mb-8 flex flex-wrap gap-2">
+        {!filterTag && <div className="project-filters mb-8 flex flex-wrap gap-2">
           {allTags.map((tag) => (
             <button
               key={tag}
@@ -667,7 +671,7 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
         </div>
 
         {/* Newsletter Section with reduced margin */}
-        <div className="mt-12 border-t pt-12 mb-12">
+        <div className="portfolio-newsletter mt-12 border-t pt-12 mb-12">
           <div className="max-w-6xl">
             <h2 className="text-3xl font-bold mb-12">
               Get notified when I have a new project about a specific topic
@@ -676,6 +680,7 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
               <CardContent>
                 <form onSubmit={handleNewsletterSubmit} className="space-y-4">
                   <input
+                    aria-label="Your email address"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -686,38 +691,25 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
 
                   <div className="space-y-2">
                     <div className="flex gap-2 mb-2">
-                      <Badge
-                        variant="outline"
-                        className="cursor-pointer"
-                        onClick={() => {
-                          if (
-                            selectedNewsletterTags.length === allTags.length
-                          ) {
-                            setSelectedNewsletterTags([]);
-                          } else {
-                            setSelectedNewsletterTags([...allTags]);
-                          }
-                        }}
+                      <button
+                        type="button"
+                        className="newsletter-topic"
+                        onClick={() => setSelectedNewsletterTags(selectedNewsletterTags.length === allTags.length ? [] : [...allTags])}
                       >
-                        {selectedNewsletterTags.length === allTags.length
-                          ? "Deselect all"
-                          : "Select all"}
-                      </Badge>
+                        {selectedNewsletterTags.length === allTags.length ? "Deselect all" : "Select all"}
+                      </button>
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {allTags.map((tag) => (
-                        <Badge
+                        <button
                           key={tag}
-                          variant={
-                            selectedNewsletterTags.includes(tag)
-                              ? "default"
-                              : "outline"
-                          }
-                          className="cursor-pointer"
+                          type="button"
+                          aria-pressed={selectedNewsletterTags.includes(tag)}
+                          className="newsletter-topic"
                           onClick={() => toggleNewsletterTag(tag)}
                         >
                           {tag}
-                        </Badge>
+                        </button>
                       ))}
                     </div>
                   </div>
@@ -734,12 +726,12 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
                   </button>
 
                   {status === "success" && (
-                    <p className="text-green-600 dark:text-green-400">
+                    <p role="status" className="text-green-600 dark:text-green-400">
                       Successfully subscribed! (No spam = NO confirmation mail)
                     </p>
                   )}
                   {status === "error" && (
-                    <p className="text-red-600 dark:text-red-400">
+                    <p role="alert" className="text-red-600 dark:text-red-400">
                       {errorMessage}
                     </p>
                   )}

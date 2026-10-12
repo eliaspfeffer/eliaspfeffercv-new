@@ -198,6 +198,7 @@ function ImageCarousel({
 
   useEffect(() => {
     if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
       paused ||
       !isInView ||
       hasCompletedAutoplay ||
@@ -220,6 +221,7 @@ function ImageCarousel({
 
   useEffect(() => {
     if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
       paused ||
       !isInView ||
       hasCompletedAutoplay ||
@@ -278,12 +280,14 @@ function ImageCarousel({
       </div>
       <button
         className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 dark:bg-black/80 rounded-full p-2 hover:bg-white/90 dark:hover:bg-black/90"
+        aria-label="Previous project image"
         onClick={scrollPrev}
       >
         <ChevronLeft className="h-6 w-6" />
       </button>
       <button
         className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 dark:bg-black/80 rounded-full p-2 hover:bg-white/90 dark:hover:bg-black/90"
+        aria-label="Next project image"
         onClick={scrollNext}
       >
         <ChevronRight className="h-6 w-6" />
