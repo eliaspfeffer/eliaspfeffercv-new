@@ -161,18 +161,24 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 5,
-          name: "AI-CTO Service",
-          url: "https://cto.eliaspfeffer.de/",
-          description:
-            "Hire a complete AI-powered technical department with Claude Code as CTO.",
+          name: "Songs",
+          url: "https://songs.eliaspfeffer.de/",
+          description: "My own Spotify-style music player.",
         },
         {
           "@type": "ListItem",
           position: 6,
-          name: "Minecraft HUD",
-          url: "https://minecrafthud.vercel.app",
+          name: "PixelHUD",
+          url: "https://pixelhud.eliaspfeffer.de/",
           description:
             "Minecraft-style HUD overlay for Mac and Windows showing system info.",
+        },
+        {
+          "@type": "ListItem",
+          position: 7,
+          name: "Athlet",
+          url: "https://athlet.eliaspfeffer.de/",
+          description: "Fitness, nutrition and longevity in one app.",
         },
       ],
     },

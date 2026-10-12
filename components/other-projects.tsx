@@ -20,6 +20,8 @@ interface Project {
   link?: string;
   tags: string[];
   isFromOtherSection?: boolean;
+  archived?: boolean;
+  unavailable?: boolean;
   image?: string | ImageObject | (string | ImageObject)[];
 }
 
@@ -196,18 +198,10 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [errorMessage, setErrorMessage] = useState("");
-  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+  const [hoveredProject, setHoveredProject] = useState<string | null>(null);
 
   // Combined projects including those from Experience and Featured Projects sections
   const projects: Project[] = [
-    // === TOP IMPORTANT ===
-    {
-      title: "Built an AI-CTO",
-      description: "Get a complete AI-powered technical department — frontend, backend, DevOps, and QA — with Claude Code as your Chief Technology Officer. One invoice. Ships to production. You only hear from us when it's done.",
-      link: "https://cto.eliaspfeffer.de/",
-      tags: ["Software Development"],
-      image: "/pics/websites/cto.jpg",
-    },
     {
       title: "Built an Aquaponic System",
       description:
@@ -233,6 +227,7 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
       title: "Wrote a Book about self repeating systems",
       description: "My summary of the most common systems of the world",
       link: "https://docs.google.com/document/d/13zCmPsjzuSZhTZ4gD9OR0kGw3jC52drX1SdriTpYrUo/edit?usp=sharing",
+      unavailable: true,
       tags: ["other"],
       image: [
         {
@@ -242,13 +237,33 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
         },
       ],
     },
-    // === VERY IMPORTANT ===
     {
-      title: "Minecraft HUD",
+      title: "Mesh Research",
+      description: "A profitable trading algorithm — outperforms DCA, HODL, and Lump Sum strategies.",
+      link: "https://meshresearch.xyz/",
+      tags: ["Bitcoin", "Software Development"],
+      image: "/pics/websites/meshresearch-current.jpg",
+    },
+    {
+      title: "PixelHUD",
       description: "Minecraft-style HUD overlay for Mac and Windows that displays system info (battery, apps, activity) in a gaming interface with sound effects.",
-      link: "https://minecrafthud.vercel.app",
+      link: "https://pixelhud.eliaspfeffer.de/",
       tags: ["Software Development"],
-      image: "/pics/websites/minecrafthud.jpg",
+      image: "/pics/websites/pixelhud-current.jpg",
+    },
+    {
+      title: "Songs",
+      description: "My own Spotify-style music player.",
+      link: "https://songs.eliaspfeffer.de/",
+      tags: ["Software Development"],
+      image: "/pics/websites/songs-current.png",
+    },
+    {
+      title: "Athlet",
+      description: "Fitness, nutrition and longevity in one app.",
+      link: "https://athlet.eliaspfeffer.de/",
+      tags: ["Software Development"],
+      image: "/pics/websites/athlet-current.jpg",
     },
     {
       title: "Calendar365",
@@ -258,10 +273,21 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
       image: "/pics/websites/calendar365.jpg",
     },
     {
+      archived: true,
+      title: "Built an AI-CTO",
+      description: "Get a complete AI-powered technical department — frontend, backend, DevOps, and QA — with Claude Code as your Chief Technology Officer. One invoice. Ships to production. You only hear from us when it's done.",
+      link: "https://cto.eliaspfeffer.de/",
+      unavailable: true,
+      tags: ["Software Development"],
+      image: "/pics/websites/cto.jpg",
+    },
+    {
+      archived: true,
       title: "NATO Early Warning System",
       description:
         "Scrapes latest NATO news, creates president-level summaries and gives back a threat level.",
       link: "https://natowatch.eliaspfeffer.de",
+      unavailable: true,
       tags: ["Software Development"],
       image: [
         {
@@ -292,49 +318,43 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
       ],
     },
     {
+      archived: true,
       title: "Nostr Relay Speed",
       description: "Benchmarks Nostr relay speeds using NIP-66 discovery, displaying response times and latencies in a live leaderboard.",
       link: "https://nostr-relay-speed.vercel.app",
+      unavailable: true,
       tags: ["Software Development"],
       image: "/pics/websites/nostr-relay-speed.jpg",
     },
     {
+      archived: true,
       title: "My Container Space",
       description: "Investor- and customer-facing website for a container storage rental business with availability tracking, mapping, and investment info.",
       link: "http://mycontainer.space/",
+      unavailable: true,
       tags: ["Software Development"],
       image: "/pics/websites/mycontainerspace.jpg",
     },
     {
-      title: "Blackstock Fund",
-      description: "Black Stock Capital — algorithmic portfolio management with risk-adjusted alpha generation and historical performance metrics.",
-      link: "https://www.blackstock.capital/",
-      tags: ["Software Development"],
-      image: "/pics/websites/blackstock.png",
-    },
-    // === IMPORTANT ===
-    {
+      archived: true,
       title: "AI Orchestrator",
       description: "Mindmap and canvas app with embedded interactive terminal nodes — build visual workflows by connecting terminal sessions and notes on an infinite canvas.",
       link: "https://orchestrator.eliaspfeffer.de/",
+      unavailable: true,
       tags: ["Software Development"],
       image: "/pics/websites/orchestrator.jpg",
     },
     {
-      title: "Mesh Research",
-      description: "A profitable trading algorithm — outperforms DCA, HODL, and Lump Sum strategies.",
-      link: "https://meshresearch.xyz/",
-      tags: ["Bitcoin", "Software Development"],
-      image: "/pics/websites/meshresearch.jpg",
-    },
-    {
+      archived: true,
       title: "Longevity Protocol",
       description: "Web app exploring longevity protocols and health optimization strategies with interactive content.",
       link: "https://longevityprotocolof.vercel.app",
+      unavailable: true,
       tags: ["Software Development"],
       image: "/pics/websites/longevityprotocol.jpg",
     },
     {
+      archived: true,
       title: "FoundersMap",
       description: "Co-founder matching platform that visualizes and connects founders based on skills, expertise, and team status.",
       link: "https://foundersmap.vercel.app",
@@ -342,18 +362,21 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
       image: "/pics/websites/foundersmap.jpg",
     },
     {
+      archived: true,
       title: "TikTok Skill Page",
       description: "Landing page showcasing TikTok-ready skills and content formats.",
       link: "https://tiktok.eliaspfeffer.de/",
+      unavailable: true,
       tags: ["Software Development"],
       image: "/pics/websites/tiktok.jpg",
     },
-    // === MEDIUM TO IMPORTANT ===
     {
+      archived: true,
       title: "A possible solution to Climate Change",
       description:
         "Problem Statement: The global atmosphere is shared by all, owned by none. Without accountability, each country has incentive to pollute while hoping others won't - leading to collective destruction. The Solution: This conceptual model of a satellite-monitored CO2 transparency system with democratic voting and economic enforcement, which would make emissions as trackable as Bitcoin transactions, solving the tragedy of the commons through blockchain-inspired accountability and transparency.",
       link: "https://co2.eliaspfeffer.de",
+      unavailable: true,
       tags: ["other"],
       image: "/pics/co2_solution.png",
     },
@@ -390,8 +413,8 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
       tags: ["AGI"],
       isFromOtherSection: true,
     },
-    // === MEDIUM ===
     {
+      archived: true,
       title: "LifePathPlaner",
       description:
         "Plan long-term life paths and see what events (e.g., lifestyle changes) would impact.",
@@ -426,7 +449,6 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
         },
       ],
     },
-    // === LOWER TO MEDIUM ===
     {
       title: "make-fetch-json-pick-easy",
       description:
@@ -441,7 +463,6 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
       link: "https://github.com/eliaspfeffer/CursorUbuntu-24.04-install-update-script",
       tags: ["Software Development"],
     },
-    // === FROM OTHER SECTIONS ===
     {
       title: "Škoda Klement eBike Project",
       description:
@@ -528,44 +549,25 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
     }
   };
 
-  return (
-    <section id="other-projects" className="pt-12 border-t border-zinc-200 dark:border-zinc-800">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold mb-6">
-          {filterTag ? `${filterTag} Projects` : "Other Projects & Publications"}
-        </h2>
-
-        {!filterTag && <div className="project-filters mb-8 flex flex-wrap gap-2">
-          {allTags.map((tag) => (
-            <button
-              key={tag}
-              type="button"
-              aria-pressed={selectedProjectTags.includes(tag)}
-              className="rounded-md border border-zinc-300 px-4 py-3 text-sm font-medium hover:bg-zinc-100 aria-pressed:bg-zinc-900 aria-pressed:text-white dark:border-zinc-600 dark:hover:bg-zinc-800 dark:aria-pressed:bg-zinc-100 dark:aria-pressed:text-zinc-900"
-              onClick={() => toggleProjectTag(tag)}
-            >
-              {tag}
-            </button>
-          ))}
-        </div>}
-
+  const renderProjects = (items: Project[]) => (
         <div className="project-grid grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-12 mb-16">
-          {filteredProjects.map((project, i) =>
-            project.link ? (
+          {items.map((project) => (
               <Card
-                key={i}
+                key={project.title}
                 className="h-full"
-                onMouseEnter={() => setHoveredProject(i)}
+                onMouseEnter={() => setHoveredProject(project.title)}
                 onMouseLeave={() => setHoveredProject(null)}
               >
                 <div
-                  className="cursor-pointer h-full"
-                  onClick={() => window.open(project.link, "_blank")}
+                  className={project.link && !project.unavailable ? "cursor-pointer h-full" : "h-full"}
+                  onClick={() => { if (project.link && !project.unavailable) window.open(project.link, "_blank", "noopener,noreferrer"); }}
                 >
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
-                      <a href={project.link} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="hover:underline">{project.title}</a>
-                      <ExternalLink className="h-4 w-4 inline-block" />
+                      {project.link && !project.unavailable ? (
+                        <a href={project.link} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="hover:underline">{project.title}</a>
+                      ) : project.title}
+                      {project.link && !project.unavailable && <ExternalLink className="h-4 w-4 inline-block" />}
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
@@ -578,7 +580,7 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
                           <ImageCarousel
                             images={project.image}
                             alt={`Screenshots of ${project.title}`}
-                            paused={hoveredProject === i}
+                            paused={hoveredProject === project.title}
                           />
                         ) : (
                           <div
@@ -616,6 +618,7 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
                     <p className="text-zinc-600 dark:text-zinc-400 mb-4">
                       {project.description}
                     </p>
+                    {project.unavailable && <p className="text-sm font-medium mb-4">Link currently unavailable</p>}
                     <div className="flex flex-wrap gap-2">
                       {project.tags.map((tag, j) => (
                         <Badge key={j} variant="secondary">
@@ -635,40 +638,40 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
                   </CardContent>
                 </div>
               </Card>
-            ) : (
-              <Card
-                key={i}
-                onMouseEnter={() => setHoveredProject(i)}
-                onMouseLeave={() => setHoveredProject(null)}
-              >
-                <CardHeader>
-                  <CardTitle>{project.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-zinc-600 dark:text-zinc-400 mb-4">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag, j) => (
-                      <Badge key={j} variant="secondary">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                  <div className="text-xs mt-2 text-zinc-500">
-                    {project.isFromOtherSection
-                      ? "See details in " +
-                        (project.tags.includes("Bitcoin") ||
-                        project.tags.includes("Software Development")
-                          ? "Featured Projects"
-                          : "Experience")
-                      : ""}
-                  </div>
-                </CardContent>
-              </Card>
             )
           )}
         </div>
+
+  );
+
+  return (
+    <section id="other-projects" className="pt-12 border-t border-zinc-200 dark:border-zinc-800">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-3xl font-bold mb-6">
+          {filterTag ? `${filterTag} Projects` : "Other Projects & Publications"}
+        </h2>
+
+        {!filterTag && <div className="project-filters mb-8 flex flex-wrap gap-2">
+          {allTags.map((tag) => (
+            <button
+              key={tag}
+              type="button"
+              aria-pressed={selectedProjectTags.includes(tag)}
+              className="rounded-md border border-zinc-300 px-4 py-3 text-sm font-medium hover:bg-zinc-100 aria-pressed:bg-zinc-900 aria-pressed:text-white dark:border-zinc-600 dark:hover:bg-zinc-800 dark:aria-pressed:bg-zinc-100 dark:aria-pressed:text-zinc-900"
+              onClick={() => toggleProjectTag(tag)}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>}
+
+        {renderProjects(filteredProjects.filter((project) => !project.archived))}
+        {filteredProjects.some((project) => project.archived) && (
+          <details className="archived-projects mb-16">
+            <summary className="cursor-pointer py-4 text-xl font-semibold">Others</summary>
+            {renderProjects(filteredProjects.filter((project) => project.archived))}
+          </details>
+        )}
 
         {/* Newsletter Section with reduced margin */}
         <div className="portfolio-newsletter mt-12 border-t pt-12 mb-12">
