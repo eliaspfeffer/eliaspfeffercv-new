@@ -525,7 +525,7 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
   };
 
   return (
-    <section id="other-projects" className="pt-20">
+    <section id="other-projects" className="pt-12 border-t border-zinc-200 dark:border-zinc-800">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold mb-6">
           {filterTag ? `${filterTag} Projects` : "Other Projects & Publications"}
@@ -533,20 +533,19 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
 
         {!filterTag && <div className="mb-8 flex flex-wrap gap-2">
           {allTags.map((tag) => (
-            <Badge
+            <button
               key={tag}
-              variant={
-                selectedProjectTags.includes(tag) ? "default" : "outline"
-              }
-              className="cursor-pointer"
+              type="button"
+              aria-pressed={selectedProjectTags.includes(tag)}
+              className="rounded-md border border-zinc-300 px-4 py-3 text-sm font-medium hover:bg-zinc-100 aria-pressed:bg-zinc-900 aria-pressed:text-white dark:border-zinc-600 dark:hover:bg-zinc-800 dark:aria-pressed:bg-zinc-100 dark:aria-pressed:text-zinc-900"
               onClick={() => toggleProjectTag(tag)}
             >
               {tag}
-            </Badge>
+            </button>
           ))}
         </div>}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+        <div className="project-grid grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-12 mb-16">
           {filteredProjects.map((project, i) =>
             project.link ? (
               <Card
@@ -561,7 +560,7 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
                 >
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
-                      {project.title}
+                      <a href={project.link} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="hover:underline">{project.title}</a>
                       <ExternalLink className="h-4 w-4 inline-block" />
                     </CardTitle>
                   </CardHeader>

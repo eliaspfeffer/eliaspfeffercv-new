@@ -6,7 +6,7 @@ import { Contact } from "@/components/contact"
 
 export default function Home() {
   return (
-    <main className="scroll-smooth">
+    <main id="main">
       <Nav />
       <Hero />
       <Projects />

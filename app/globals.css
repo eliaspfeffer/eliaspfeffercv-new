@@ -49,3 +49,28 @@
   }
 }
 
+
+@layer base {
+  html { scroll-padding-top: 5rem; }
+  :focus-visible { outline: 2px solid hsl(var(--ring)); outline-offset: 4px; }
+  ::selection { background: hsl(var(--foreground)); color: hsl(var(--background)); }
+  a { text-underline-offset: 4px; }
+}
+
+.project-grid > div {
+  min-width: 0;
+  border: 0;
+  border-top: 1px solid hsl(var(--border));
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+.project-grid > div > div > div,
+.project-grid > div > div { min-width: 0; }
+.project-grid p { line-height: 1.7; }
+.project-grid h3, .project-grid a { overflow-wrap: anywhere; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after { transition-duration: 0s !important; animation-duration: 0s !important; }
+}

@@ -584,10 +584,10 @@ export function Projects() {
   ];
 
   return (
-    <section id="projects" className="py-20">
+    <section id="projects" className="pt-8 pb-16 sm:pb-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold mb-12">Featured Projects</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-8">Featured Projects</h2>
+        <div className="project-grid grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-12">
           {projects.map((project, i) =>
             project.link ? (
               <Card
@@ -605,7 +605,7 @@ export function Projects() {
                       {project.icon}
                       <div className="flex-grow">
                         <CardTitle className="flex items-center gap-2">
-                          {project.title}
+                          <a href={project.link} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="hover:underline">{project.title}</a>
                           <ExternalLink className="h-4 w-4 inline-block" />
                         </CardTitle>
                         <CardDescription>
