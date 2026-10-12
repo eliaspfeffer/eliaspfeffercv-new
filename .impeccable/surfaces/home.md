@@ -10,7 +10,7 @@ First viewport: Elias's name and role on a left paper panel; portfolio descripti
 
 Signature: native CSS position:sticky keeps the photograph at 64px below the navigation. Featured and other project panels flow left and right with a reserved center gap of clamp(340px, 35vw, 560px). Even project panels are offset downward by 128px. The opaque newsletter closes the photograph passage; contact follows on paper.
 
-At 1099px and below, the photograph returns to ordinary document flow above the introduction and projects. At 599px and below the introduction becomes one column. Project grids retain their existing one-column mobile / two-column tablet behavior. Motion reduction suppresses automatic media advancement and CSS transitions, while content stays visible.
+At 1099px and below, the photograph returns to ordinary document flow above the introduction and projects. At 599px and below the introduction becomes one column. The photograph frame uses clamp(240px, 36svh, 300px) with a centered 1.5× zoom at a 75% vertical origin, keeping the face readable and revealing the introduction earlier. Project grids retain their existing one-column mobile / two-column tablet behavior. Motion reduction suppresses automatic media advancement and CSS transitions, while content stays visible.
 
 ## Assets and content
 

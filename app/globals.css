@@ -159,8 +159,8 @@ input { caret-color: #345843; }
   .portfolio-newsletter { padding: 3rem 0; }
 }
 @media (max-width: 599px) {
-  .portrait-frame { height: 390px; }
-  .portrait-photo { object-position: 50% 75%; }
+  .portrait-frame { height: clamp(240px, 36svh, 300px); overflow: hidden; }
+  .portrait-photo { object-position: 50% 75%; transform: scale(1.5); transform-origin: 50% 75%; }
   .portrait-intro { grid-template-columns: 1fr; gap: 2rem; padding: 2.5rem 1.25rem 2rem; }
   .intro-identity h1 { font-size: 4.5rem; }
   .intro-description br { display: none; }
