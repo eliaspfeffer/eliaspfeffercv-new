@@ -135,7 +135,14 @@
         "name": "project-two-columns",
         "value": "768px"
       }
-    ]
+    ],
+    "glassMaterial": {
+      "fill": "rgba(245,249,255,.82)",
+      "edge": "rgba(255,255,255,.65)",
+      "backdropFilter": "blur(24px) saturate(150%)",
+      "radius": "24px",
+      "fallbackOpacity": 0.97
+    }
   },
   "components": [
     {
@@ -170,17 +177,17 @@
       "name": "Topic selection",
       "kind": "chip",
       "refersTo": "topic",
-      "description": "Square topic control with an explicit selected state.",
+      "description": "Rounded topic control with an explicit selected state.",
       "html": "<button class=\"ds-topic\" aria-pressed=\"true\">Engineering</button>",
-      "css": ".ds-topic{padding:.55rem .75rem;font:.85rem Inter,sans-serif;background:#f7f7f4;color:#202823;border:1px solid #bbc4ba;border-radius:0}.ds-topic:hover{background:#e7ebe5}.ds-topic[aria-pressed=\"true\"]{background:#202823;color:#f7f7f4;border-color:#202823}.ds-topic:focus-visible { outline:2px solid #202823; outline-offset:4px; }"
+      "css": ".ds-topic{padding:.55rem .75rem;font:.85rem Inter,sans-serif;background:#f7f7f4;color:#202823;border:1px solid #bbc4ba;border-radius:12px}.ds-topic:hover{background:#e7ebe5}.ds-topic[aria-pressed=\"true\"]{background:#202823;color:#f7f7f4;border-color:#202823}.ds-topic:focus-visible { outline:2px solid #202823; outline-offset:4px; }"
     },
     {
       "name": "Project panel",
       "kind": "card",
       "refersTo": "project-panel",
-      "description": "Flat opaque panel preserving project title, copy and media.",
+      "description": "Translucent blurred panel preserving project title, copy and media.",
       "html": "<article class=\"ds-project\"><h3><a href=\"#project\">Project title</a></h3><p>Existing project description and media are preserved.</p></article>",
-      "css": ".ds-project{background:#f7f7f4;color:#202823;padding:24px;font:.95rem/1.7 Inter,sans-serif}.ds-project h3{font-size:1.5rem;line-height:1.2;letter-spacing:-.025em;margin:0 0 16px}.ds-project p{color:#535c55}.ds-project a{color:inherit;text-decoration:none}.ds-project a:hover{text-decoration:underline;text-underline-offset:4px}.ds-project a:focus-visible { outline:2px solid #202823; outline-offset:4px; }"
+      "css": ".ds-project{background:rgba(245,249,255,.82);backdrop-filter:blur(24px) saturate(150%);border:1px solid rgba(255,255,255,.65);border-radius:24px;box-shadow:inset 0 1px 0 rgba(255,255,255,.65),0 12px 32px rgba(20,39,57,.12);color:#202823;padding:24px;font:.95rem/1.7 Inter,sans-serif}.ds-project h3{font-size:1.5rem;line-height:1.2;letter-spacing:-.025em;margin:0 0 16px}.ds-project p{color:#35424b}.ds-project a{color:inherit;text-decoration:none}.ds-project a:hover{text-decoration:underline;text-underline-offset:4px}.ds-project a:focus-visible { outline:2px solid #202823; outline-offset:4px; }"
     }
   ],
   "narrative": {

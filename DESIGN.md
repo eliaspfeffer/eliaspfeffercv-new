@@ -1,6 +1,6 @@
 ---
 name: Elias Pfeffer portfolio
-description: Portrait-centered extension of the existing portfolio
+description: Liquid Glass variant of the centered portrait portfolio
 colors:
   ink: "#202823"
   paper: "#f7f7f4"
@@ -26,6 +26,8 @@ typography:
     fontSize: "0.95rem"
     lineHeight: 1.7
 rounded:
+  glass: "24px"
+  topic: "12px"
   square: "0px"
 spacing:
   panel: "24px"
@@ -35,17 +37,17 @@ components:
   topic:
     backgroundColor: "{colors.paper}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.square}"
+    rounded: "{rounded.topic}"
     padding: "0.55rem 0.75rem"
   topic-selected:
     backgroundColor: "{colors.ink}"
     textColor: "{colors.paper}"
-    rounded: "{rounded.square}"
+    rounded: "{rounded.topic}"
     padding: "0.55rem 0.75rem"
   project-panel:
-    backgroundColor: "{colors.paper}"
+    backgroundColor: "rgba(245,249,255,.82)"
     textColor: "{colors.ink}"
-    rounded: "{rounded.square}"
+    rounded: "{rounded.glass}"
     padding: "24px"
 ---
 
@@ -55,11 +57,11 @@ components:
 
 **Creative North Star: "Elias at the center"**
 
-This records the built local portrait extension, not a new global brand commitment. The existing portfolio's restrained typography, factual project content and component library remain. The photograph supplies the expressive material; flat opaque panels keep the work readable over it.
+This records the built local portrait extension, not a new global brand commitment. The existing portfolio's restrained typography, factual project content and component library remain. The photograph supplies the expressive material; translucent blurred panels keep the work readable over it.
 
 **Key Characteristics:**
 - Real photography carries the composition.
-- Opaque paper panels protect reading contrast.
+- Translucent glass panels protect reading contrast with a conservative opacity floor.
 - Existing Inter typography and project media remain.
 - Native scrolling preserves ordinary browser navigation.
 
@@ -100,3 +102,9 @@ Carousel controls have accessible labels. Image autoplay is disabled when reduce
 - Don't replace the real portrait with generated likenesses.
 - Don't hide essential content behind scroll animations.
 - Don't treat the local experiment as permission to publish.
+
+## Liquid Glass branch
+
+On design/liquid-glass the side panels use rgba(245,249,255,.82), a subtle diagonal highlight, a translucent white edge, 24px corners and backdrop blur(24px) saturate(150%). This requested material replaces opaque paper on intro panels, project cards, section labels and project filters. The real photograph and reserved central corridor remain. Dark Reader is allowed to transform colors normally. More-contrast preferences and browsers without backdrop-filter use a .97 opacity fallback. Mobile panels retain their own 24px content padding.
+
+Browser verification with active Dark Reader measured a conservative body-text contrast of 4.95:1 even when composited over a white backdrop; its dark highlight can only improve that bound. Small-width layout, filter keyboard interaction and last project were checked without overflow. Native iOS rendering and other Dark Reader presets were not tested.
