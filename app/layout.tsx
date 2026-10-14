@@ -11,7 +11,7 @@ const BASE_URL = "https://eliaspfeffer.de";
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "Elias Pfeffer — Builder, Developer & Entrepreneur",
+    default: "Elias Pfeffer - Mechatronics Engineer & Entrepreneur",
     template: "%s | Elias Pfeffer",
   },
   description:
@@ -51,17 +51,18 @@ export const metadata: Metadata = {
     canonical: BASE_URL,
   },
   openGraph: {
-    title: "Elias Pfeffer — Builder, Developer & Entrepreneur",
+    title: "Elias Pfeffer - Mechatronics Engineer & Entrepreneur",
     description:
       "Mechatronics engineer & full-stack developer from Germany. Bitcoin trading algorithms, AI models, electric vehicles, and 20+ software projects.",
     url: BASE_URL,
     siteName: "Elias Pfeffer Portfolio",
     images: [
       {
-        url: "/elias.png",
-        width: 800,
-        height: 800,
-        alt: "Elias Pfeffer — Builder, Developer & Entrepreneur",
+        url: "/liquid-glass-social-preview.jpg",
+        width: 1200,
+        height: 630,
+        type: "image/jpeg",
+        alt: "Elias Pfeffer - Mechatronics Engineer & Entrepreneur",
       },
     ],
     locale: "en_US",
@@ -69,10 +70,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Elias Pfeffer — Builder, Developer & Entrepreneur",
+    title: "Elias Pfeffer - Mechatronics Engineer & Entrepreneur",
     description:
       "Mechatronics engineer & full-stack developer from Germany. Bitcoin trading algorithms, AI models, electric vehicles, and 20+ software projects.",
-    images: ["/elias.png"],
+    images: ["/liquid-glass-social-preview.jpg"],
     creator: "@eliaspfeffer",
   },
   icons: {
