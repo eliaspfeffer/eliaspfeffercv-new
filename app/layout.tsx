@@ -2,11 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import type React from "react";
-import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const BASE_URL = "https://eliaspfeffer.de";
+const BASE_URL = "https://www.eliaspfeffer.de";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -194,7 +193,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        <Script
+        <script
           id="json-ld-person"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
