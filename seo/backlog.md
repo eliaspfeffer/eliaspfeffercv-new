@@ -13,3 +13,7 @@ Sitemap auf echte Seiten reduziert; Canonical und serverseitiges Schema korrigie
 Nach Veröffentlichung Canonical und Sitemap live kontrollieren und die geänderten Projektkarten im bestehenden Chrome prüfen. Google-Indexierung und Rankingwirkung bleiben ohne verifizierte Search-Console-Daten offen.
 
 `npm run lint` startet mangels bestehender ESLint-Konfiguration einen Einrichtungsdialog und liefert keinen abgeschlossenen Lintlauf. Next-Build, expliziter TypeScript-Check und Assertions gegen das erzeugte öffentliche HTML sind ausgeführt.
+
+## Bestehende öffentliche Dateihistorie
+
+15.10.2026: Eine interne Analyseabbildung wird im Sicherheits-Folge-PR aus dem öffentlichen Assetbestand entfernt und durch die freigegebene Homepageaufnahme ersetzt. Das Repository ist öffentlich. Der ursprüngliche Commit 095a3f083c91daf680af87624ec186fb7f7ac2a4 vom 20.04.2026 ist bereits öffentlich; ausschließlich HTTP-HEAD-Prüfungen lieferten für Raw-HEAD und den historischen Raw-Pfad jeweils Status 200. Ein Löschcommit entfernt keine alten Git-Blobs oder bestehenden Deploymentkopien. Ein Umschreiben der Historie wurde nicht vorgenommen und benötigt eine gesonderte Entscheidung. Die zusätzliche unreferenzierte alte Homepageaufnahme wurde visuell geprüft; keine Dashboard-/Strategieansicht erkennbar.
