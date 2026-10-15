@@ -431,13 +431,7 @@ export function Projects() {
       ],
       date: "2024-now",
       link: "https://meshresearch.xyz",
-      image: [
-        "/pics/websites/meshresearch-current.jpg",
-        {
-          url: "/pics/quant_trading_analysis.png",
-          objectFit: "contain",
-        },
-      ],
+      image: "/pics/websites/meshresearch-current.jpg",
     },
     {
       title: "Engineered BitChat",

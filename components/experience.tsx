@@ -148,9 +148,9 @@ export function Experience() {
       link: "https://meshresearch.xyz",
       images: [
         {
-          url: "/pics/quant_trading_analysis.png",
+          url: "/pics/websites/meshresearch-current.jpg",
           description:
-            "Quantitative Analysis of my Bitcoin Trading Bot compared to classic trading strategies.",
+            "Mesh Research public website.",
         },
       ],
     },
