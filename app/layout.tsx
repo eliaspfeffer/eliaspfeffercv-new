@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     template: "%s | Elias Pfeffer",
   },
   description:
-    "Elias Pfeffer is a mechatronics engineer, full-stack developer, and serial builder from Germany. Explore his portfolio: Bitcoin trading algorithms, AI consciousness models, electric vehicles, and 20+ software projects.",
+    "Elias Pfeffer is a mechatronics engineer, full-stack developer, and serial builder from Germany. Explore his public projects in Bitcoin research, embodied AI, electric vehicles, and software development.",
   keywords: [
     "Elias Pfeffer",
     "elias pfeffer developer",
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Elias Pfeffer - Mechatronics Engineer & Entrepreneur",
     description:
-      "Mechatronics engineer & full-stack developer from Germany. Bitcoin trading algorithms, AI models, electric vehicles, and 20+ software projects.",
+      "Mechatronics engineer & full-stack developer from Germany. Bitcoin research, embodied AI, electric vehicles, and software projects.",
     url: BASE_URL,
     siteName: "Elias Pfeffer Portfolio",
     images: [
@@ -71,9 +71,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Elias Pfeffer - Mechatronics Engineer & Entrepreneur",
     description:
-      "Mechatronics engineer & full-stack developer from Germany. Bitcoin trading algorithms, AI models, electric vehicles, and 20+ software projects.",
+      "Mechatronics engineer & full-stack developer from Germany. Bitcoin research, embodied AI, electric vehicles, and software projects.",
     images: ["/liquid-glass-social-preview.jpg"],
-    creator: "@eliaspfeffer",
+    creator: "@elias_pfeffer",
   },
   icons: {
     icon: "/icon.jpeg",
@@ -107,7 +107,7 @@ const jsonLd = {
       sameAs: [
         "https://github.com/eliaspfeffer",
         "https://www.linkedin.com/in/eliaspfeffer/",
-        "https://twitter.com/eliaspfeffer",
+        "https://x.com/elias_pfeffer",
       ],
       email: "eliaspfeffer@gmail.com",
       nationality: "German",
@@ -124,15 +124,15 @@ const jsonLd = {
     {
       "@type": "ItemList",
       "@id": `${BASE_URL}/#projects`,
-      name: "Featured Projects by Elias Pfeffer",
+      name: "Public Projects by Elias Pfeffer",
       itemListElement: [
         {
           "@type": "ListItem",
           position: 1,
-          name: "Mesh Research — Profitable Bitcoin Trading Algorithm",
+          name: "Mesh Research — Bitcoin Trading Research",
           url: "https://meshresearch.xyz",
           description:
-            "A trading algorithm that outperforms DCA, HODL, and Lump Sum strategies.",
+            "Bitcoin trading research with historical strategy backtests and benchmark comparisons.",
         },
         {
           "@type": "ListItem",
@@ -178,7 +178,14 @@ const jsonLd = {
           position: 7,
           name: "Athlet",
           url: "https://athlet.eliaspfeffer.de/",
-          description: "Fitness, nutrition and longevity in one app.",
+          description: "Training planning, nutrition and personal health logs in one app.",
+        },
+        {
+          "@type": "ListItem",
+          position: 8,
+          name: "Calendar365",
+          url: "https://calendar365.app/",
+          description: "A year-at-a-glance planner with sticky notes, optional Google Calendar sync, and calendar sharing.",
         },
       ],
     },

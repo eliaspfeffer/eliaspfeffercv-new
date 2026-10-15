@@ -239,7 +239,7 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
     },
     {
       title: "Mesh Research",
-      description: "A profitable trading algorithm — outperforms DCA, HODL, and Lump Sum strategies.",
+      description: "Bitcoin trading research with historical strategy backtests and benchmark comparisons. Historical results do not guarantee future performance.",
       link: "https://meshresearch.xyz/",
       tags: ["Bitcoin", "Software Development"],
       image: "/pics/websites/meshresearch-current.jpg",
@@ -260,7 +260,7 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
     },
     {
       title: "Athlet",
-      description: "Fitness, nutrition and longevity in one app.",
+      description: "Training planning, nutrition and personal health logs in one app.",
       link: "https://athlet.eliaspfeffer.de/",
       tags: ["Software Development"],
       image: "/pics/websites/athlet-current.jpg",

@@ -415,9 +415,9 @@ export function Projects() {
       image: "/pics/dkmc-screenshot.png",
     },
     {
-      title: "Built a profitable trading algorithm",
+      title: "Built Mesh Research — Bitcoin Trading Research",
       description:
-        "Wrote a Trading Algorithm, which outperforms every other commonly known trading strategy like DCA (Dollar Cost Averaging), Hodl (buy and never sell), Lump Summing (buy all at once), etc..",
+        "Built Bitcoin trading research software to compare historical strategy backtests with DCA (Dollar Cost Averaging), HODL (buy and hold), and lump-sum investing. Historical results do not guarantee future performance.",
       icon: <Bitcoin className="h-6 w-6" />,
       tags: [
         "Python",
