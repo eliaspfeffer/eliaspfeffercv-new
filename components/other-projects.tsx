@@ -673,6 +673,7 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
           </details>
         )}
 
+        {process.env.NEXT_PUBLIC_NEWSLETTER_ENABLED === "true" ? <>
         {/* Newsletter Section with reduced margin */}
         <div className="portfolio-newsletter mt-12 border-t pt-12 mb-12">
           <div className="max-w-6xl">
@@ -746,6 +747,9 @@ export function OtherProjects({ filterTag }: { filterTag?: string } = {}) {
             </Card>
           </div>
         </div>
+        </> : <p className="portfolio-newsletter mt-12 border-t pt-8 text-sm text-muted-foreground">
+          Newsletter signup is temporarily unavailable.
+        </p>}
       </div>
     </section>
   );

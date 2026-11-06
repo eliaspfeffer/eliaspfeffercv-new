@@ -2,13 +2,6 @@ import { createClient } from "@supabase/supabase-js";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -16,6 +9,14 @@ export default async function handler(
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method not allowed" });
   }
+
+  if (process.env.NEWSLETTER_ENABLED !== "true" ||
+      !process.env.RESEND_API_KEY || !process.env.NEXT_PUBLIC_SUPABASE_URL ||
+      !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    return res.status(503).json({ message: "Newsletter signup is temporarily unavailable." });
+  }
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
 
   const { email, tags } = req.body;
 
