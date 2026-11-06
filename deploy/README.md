@@ -3,6 +3,8 @@
 Build the production static export with newsletter flags absent/false. Serve only
 `out` through Caddy at `/opt/portfolio-web/current`; no Node service or production
 credentials are required. Keep the current release and one healthy rollback.
+Inter is bundled locally under its SIL Open Font License so builds need no Google
+Fonts network access.
 
 Newsletter signup is explicitly unavailable in this migration. The source API's
 public preference-update ownership contract needs resolution, and its provider
