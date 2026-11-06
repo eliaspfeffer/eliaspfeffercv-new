@@ -1,0 +1,21 @@
+eliaspfeffer.de, www.eliaspfeffer.de {
+    encode zstd gzip
+    root * /opt/portfolio-web/current
+    handle /api/subscribe {
+        header Content-Type application/json
+        respond `{"message":"Newsletter signup is temporarily unavailable."}` 503
+    }
+    @private path /api/* /.env* /.git/* /node_modules/* /package.json /package-lock.json
+    handle @private {
+        respond 404
+    }
+    handle {
+        try_files {path} {path}.html {path}/index.html
+        file_server
+    }
+    header {
+        -Server
+        X-Content-Type-Options nosniff
+        Referrer-Policy strict-origin-when-cross-origin
+    }
+}
