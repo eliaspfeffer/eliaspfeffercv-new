@@ -11,6 +11,9 @@ public preference-update ownership contract needs resolution, and its provider
 configuration has not been restored. Do not expose that API or enable either
 newsletter flag without a separate verified backend change. The public site must
 show unavailability rather than collecting addresses or claiming success.
+The unused mail dependency chain still includes an unpatched deepmerge advisory;
+resolve it before restoring that backend. No mail packages or Node modules are
+included in the static deployment.
 
 Verify the project links, image loading, last archive entry, keyboard collapse,
 filtering and small-screen overflow in the actual browser after each release.
